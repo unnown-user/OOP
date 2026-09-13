@@ -1,11 +1,9 @@
 package ru.nsu.asemenychev.Task_1_1_1;
 
-import org.junit.jupiter.api.Test;
 import java.util.Random;
 
-public class HeapSortComplexityTest {
 
-    @Test
+public class HeapSortComplexity {
     void time() {
         int[] sizes = {10000, 100000, 1000000, 10000000};
 
