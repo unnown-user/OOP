@@ -1,1 +1,1 @@
-memberSearchIndex = [{"p":"ru.nsu.asemenychev.Task_1_1_1","c":"HeapSort","l":"HeapSort()","u":"%3Cinit%3E()"},{"p":"ru.nsu.asemenychev.Task_1_1_1","c":"HeapSortComplexity","l":"HeapSortComplexity()","u":"%3Cinit%3E()"},{"p":"ru.nsu.asemenychev.Task_1_1_1","c":"HeapSort","l":"sort(int[])"}];updateSearchResults();
+memberSearchIndex = [{"p":"ru.nsu.asemenychev.Task_1_1_1","c":"HeapSort","l":"HeapSort()","u":"%3Cinit%3E()"},{"p":"ru.nsu.asemenychev.Task_1_1_1","c":"HeapSort","l":"sort(int[])"}];updateSearchResults();
