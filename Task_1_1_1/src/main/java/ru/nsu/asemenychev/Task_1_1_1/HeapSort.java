@@ -1,6 +1,14 @@
 package ru.nsu.asemenychev.Task_1_1_1;
 
+/**
+ * Класс сортирующий массив пирамидальной сортировкой.
+ */
 public class HeapSort {
+    /**
+     * Пирамидальная сортировка массива.
+     *
+     * @param arr массив который требуется отсортировать.
+     */
     public static void sort(int[] arr) {
         if (arr == null || arr.length <= 1) {
             return;
@@ -19,6 +27,13 @@ public class HeapSort {
         }
     }
 
+    /**
+     * Создание бинарной кучи.
+     *
+     * @param arr массив из элементов которого требуется создать кучу.
+     * @param n размер массива и бинарной кучи.
+     * @param i индекс корня бинарной кучи.
+     */
     private static void heapify(int[] arr, int n, int i) {
         int largest = i;
         int left  = 2 * i + 1;
