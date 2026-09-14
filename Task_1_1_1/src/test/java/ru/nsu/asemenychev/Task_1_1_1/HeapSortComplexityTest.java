@@ -1,11 +1,8 @@
 package ru.nsu.asemenychev.Task_1_1_1;
 
-import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 
 class HeapSortComplexity {

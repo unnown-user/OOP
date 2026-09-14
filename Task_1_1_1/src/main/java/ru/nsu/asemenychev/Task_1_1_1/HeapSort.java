@@ -23,7 +23,7 @@ public class HeapSort {
             int tmp = arr[0];
             arr[0] = arr[i];
             arr[i] = tmp;
-            heapify(arr, i,0);
+            heapify(arr, i, 0);
         }
     }
 
