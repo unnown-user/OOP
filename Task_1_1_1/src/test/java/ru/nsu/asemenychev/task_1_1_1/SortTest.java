@@ -1,6 +1,6 @@
-package ru.nsu.asemenychev.Task_1_1_1;
+package ru.nsu.asemenychev.task_1_1_1;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 import org.junit.jupiter.api.Test;
 
