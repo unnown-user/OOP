@@ -40,4 +40,9 @@ bin/
 .vscode/
 
 ### Mac OS ###
-.DS_Store
+.DS_Storebuild/
+.gradle/
+.idea/
+*.swp
+*.iml
+out/

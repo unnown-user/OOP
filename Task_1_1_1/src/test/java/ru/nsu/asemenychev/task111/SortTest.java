@@ -1,4 +1,4 @@
-package ru.nsu.asemenychev.task_1_1_1;
+package ru.nsu.asemenychev.task111;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
