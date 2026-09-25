@@ -1,4 +1,4 @@
-package ru.nsu.asemenychev.Task_1_1_2;
+package ru.nsu.asemenychev.task112;
 
 import java.util.ArrayList;
 import java.util.Collections;

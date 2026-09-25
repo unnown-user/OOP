@@ -1,4 +1,4 @@
-package ru.nsu.asemenychev.Task_1_1_2;
+package ru.nsu.asemenychev.task112;
 
 import java.util.Scanner;
 
@@ -178,7 +178,7 @@ public class BlackjackGame {
     private void printDealerHand(boolean hideHole) {
         if (hideHole) {
             Card first = dealer.getHand().getCards().get(0);
-            System.out.println("Карты дилера: [" + first + ", <закрытая карта ]");
+            System.out.println("Карты дилера: [" + first + ", <закрытая карта>]");
         } else {
             System.out.println("Карты дилера: " + dealer.getHand());
         }

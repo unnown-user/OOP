@@ -1,4 +1,4 @@
-package ru.nsu.asemenychev.Task_1_1_2;
+package ru.nsu.asemenychev.task112;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -81,7 +81,7 @@ public class BlackjackGameTest {
         hand.add(new Card(Card.Rank.TEN, Card.Suit.SPADES));
 
         assertEquals(
-                "[Туз Трефы (1), Тройка Трефы (3), Десятка Пики (10)] > 14",
+                "[Туз Трефы (1), Тройка Трефы (3), Десятка Пики (10)] => 14",
                 hand.toString()
         );
     }
