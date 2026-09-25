@@ -49,12 +49,9 @@ public class BlackjackGameTest {
     }
 
     @Test
-    void deckHas52CardsPerDeck() {
-        Deck deck = new Deck(1);
+    void deckHas52Cards() {
+        Deck deck = new Deck();
         assertEquals(52, deck.size());
-
-        Deck twoDecks = new Deck(2);
-        assertEquals(104, twoDecks.size());
     }
 
     @Test
