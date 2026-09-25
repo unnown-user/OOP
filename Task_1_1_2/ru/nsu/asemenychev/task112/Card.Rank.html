@@ -86,6 +86,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public static enum </span><span class="element-name type-name-label">Card.Rank</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Enum.html" title="class or interface in java.lang" class="external-link">Enum</a>&lt;<a href="Card.Rank.html" title="enum class in ru.nsu.asemenychev.task112">Card.Rank</a>&gt;</span></div>
+<div class="block">Номинал карты. Хранит русское название и базовое число очков.
+ Валет, дама, король дают 10 очков, туз — 11.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -304,12 +306,20 @@ not permitted.)</div>
 <section class="detail" id="getDisplayName()">
 <h3>getDisplayName</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getDisplayName</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>русское название номинала</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getValue()">
 <h3>getValue</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getValue</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>базовое количество очков</dd>
+</dl>
 </section>
 </li>
 </ul>

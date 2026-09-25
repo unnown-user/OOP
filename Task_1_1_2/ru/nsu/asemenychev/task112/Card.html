@@ -76,6 +76,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Card</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Класс создающий карту.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -90,10 +91,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>static enum&nbsp;</code></div>
 <div class="col-second even-row-color"><code><a href="Card.Rank.html" class="type-name-link" title="enum class in ru.nsu.asemenychev.task112">Card.Rank</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Номинал карты.</div>
+</div>
 <div class="col-first odd-row-color"><code>static enum&nbsp;</code></div>
 <div class="col-second odd-row-color"><code><a href="Card.Suit.html" class="type-name-link" title="enum class in ru.nsu.asemenychev.task112">Card.Suit</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">Масть карты.</div>
+</div>
 </div>
 </section>
 </li>
@@ -107,7 +112,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(ru.nsu.asemenychev.task112.Card.Rank,ru.nsu.asemenychev.task112.Card.Suit)" class="member-name-link">Card</a><wbr>(<a href="Card.Rank.html" title="enum class in ru.nsu.asemenychev.task112">Card.Rank</a>&nbsp;rank,
  <a href="Card.Suit.html" title="enum class in ru.nsu.asemenychev.task112">Card.Suit</a>&nbsp;suit)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Создаёт карту с заданными мастью и номиналом.</div>
+</div>
 </div>
 </section>
 </li>
@@ -124,10 +131,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#baseValue()" class="member-name-link">baseValue</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Базовое количество очков карты (без учёта пересчёта тузов).</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#display(int)" class="member-name-link">display</a><wbr>(int&nbsp;value)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Формирует строковое представление карты с указанным значением очков.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Card.Rank.html" title="enum class in ru.nsu.asemenychev.task112">Card.Rank</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRank()" class="member-name-link">getRank</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
@@ -159,6 +170,12 @@ loadScripts(document, 'script');</script>
 <h3>Card</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Card</span><wbr><span class="parameters">(<a href="Card.Rank.html" title="enum class in ru.nsu.asemenychev.task112">Card.Rank</a>&nbsp;rank,
  <a href="Card.Suit.html" title="enum class in ru.nsu.asemenychev.task112">Card.Suit</a>&nbsp;suit)</span></div>
+<div class="block">Создаёт карту с заданными мастью и номиналом.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>rank</code> - номинал карты</dd>
+<dd><code>suit</code> - масть карты</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -173,24 +190,46 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getRank()">
 <h3>getRank</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Card.Rank.html" title="enum class in ru.nsu.asemenychev.task112">Card.Rank</a></span>&nbsp;<span class="element-name">getRank</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>номинал карты</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getSuit()">
 <h3>getSuit</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Card.Suit.html" title="enum class in ru.nsu.asemenychev.task112">Card.Suit</a></span>&nbsp;<span class="element-name">getSuit</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>масть карты</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="baseValue()">
 <h3>baseValue</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">baseValue</span>()</div>
+<div class="block">Базовое количество очков карты (без учёта пересчёта тузов).</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>2–10 для числовых карт, 10 для картинок, 11 для туза</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="display(int)">
 <h3>display</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">display</span><wbr><span class="parameters">(int&nbsp;value)</span></div>
+<div class="block">Формирует строковое представление карты с указанным значением очков.
+ Род прилагательного подбирается по номиналу: женский для дамы,
+ мужской для короля, множественное число — для остальных.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>value</code> - значение очков, которое нужно показать в скобках</dd>
+<dt>Returns:</dt>
+<dd>строка вида "Масть Номинал (значение)"</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -200,6 +239,8 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
+<dt>Returns:</dt>
+<dd>отображение карты с базовым значением очков</dd>
 </dl>
 </section>
 </li>
