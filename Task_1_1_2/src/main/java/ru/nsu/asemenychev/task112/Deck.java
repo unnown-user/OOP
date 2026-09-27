@@ -1,9 +1,7 @@
 package ru.nsu.asemenychev.task112;
 
 import java.util.ArrayList;
-
 import java.util.Collections;
-
 import java.util.List;
 
 /**
@@ -56,6 +54,8 @@ public class Deck {
     }
 
     /**
+     * Возвращает текущее количество карт в колоде.
+     *
      * @return текущее количество карт в колоде
      */
     public int size() {

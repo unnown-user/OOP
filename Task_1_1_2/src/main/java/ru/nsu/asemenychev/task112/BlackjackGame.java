@@ -19,6 +19,7 @@ public class BlackjackGame {
 
     /**
      * Создаёт игру с одной стандартной колодой (52 карты).
+     *
      * @param scanner источник ввода.
      */
     public BlackjackGame(Scanner scanner) {
@@ -83,8 +84,8 @@ public class BlackjackGame {
     /**
      * Ход игрока: цикл, пока игрок не остановится или не переберёт.
      *
-     * @return true  если ход завершён корректно (игрок остановился),
-     *         false если игрок перебрал (раунд проигран)
+     * @return {@code true}  если ход завершён корректно (игрок остановился),
+     *         {@code false} если игрок перебрал (раунд проигран)
      */
     private boolean playerTurn() {
         System.out.println("Ваш ход");
@@ -218,8 +219,8 @@ public class BlackjackGame {
     /**
      * Печатает карты дилера.
      *
-     * @param hideHole: true — вторая карта скрыта,
-     *                  false — открыта.
+     * @param hideHole: {@code true} — вторая карта скрыта,
+     *                  {@code false} — открыта.
      */
     private void printDealerHand(boolean hideHole) {
         if (hideHole) {

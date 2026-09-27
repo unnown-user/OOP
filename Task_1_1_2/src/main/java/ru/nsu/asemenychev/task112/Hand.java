@@ -49,6 +49,8 @@ public class Hand {
     }
 
     /**
+     * Возвращает карту по указанной позиции.
+     *
      * @param index позиция карты в руке (0 — первая).
      * @return карта по указанной позиции.
      */
@@ -57,6 +59,8 @@ public class Hand {
     }
 
     /**
+     * Проверяет, пуста ли рука.
+     *
      * @return {@code true}, если в руке нет карт.
      */
     public boolean isEmpty() {
@@ -64,6 +68,8 @@ public class Hand {
     }
 
     /**
+     * Возвращает текущую сумму очков руки.
+     *
      * @return текущая сумма очков руки.
      */
     public int total() {
@@ -71,6 +77,8 @@ public class Hand {
     }
 
     /**
+     * Проверяет, является ли рука блэкджеком.
+     *
      * @return {@code true}, если в руке ровно 2 карты и сумма равна 21.
      */
     public boolean isBlackjack() {
@@ -78,6 +86,8 @@ public class Hand {
     }
 
     /**
+     * Проверяет, перебрала ли рука.
+     *
      * @return {@code true}, если сумма очков превышает 21.
      */
     public boolean isBust() {

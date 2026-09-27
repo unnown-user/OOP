@@ -6,6 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Модульные тесты для классов блэкджек-игры:
+ * {@link Card}, {@link Deck}, {@link Hand}, {@link Dealer}.
+ */
 public class BlackjackGameTest {
 
     @Test

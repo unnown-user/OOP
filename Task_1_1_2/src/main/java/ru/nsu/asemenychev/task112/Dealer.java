@@ -11,7 +11,7 @@ public class Dealer extends Player {
     /**
      * Решает, должен ли дилер взять ещё одну карту.
      *
-     * @return true, если сумма очков меньше 17
+     * @return {@code true}, если сумма очков меньше 17
      */
     public boolean shouldHit() {
         return getHand().total() < 17;

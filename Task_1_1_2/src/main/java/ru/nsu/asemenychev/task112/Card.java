@@ -20,6 +20,8 @@ public class Card {
         private final String masculine;
 
         /**
+         * Создаёт константу масти с тремя формами названия.
+         *
          * @param plural    название масти во множественном числе
          * @param feminine  прилагательное в женском роде
          * @param masculine прилагательное в мужском роде
@@ -66,6 +68,8 @@ public class Card {
         private final int value;
 
         /**
+         * Создаёт константу номинала с названием и базовым числом очков.
+         *
          * @param displayName название на русском
          * @param value       базовое количество очков
          */
@@ -75,6 +79,8 @@ public class Card {
         }
 
         /**
+         * Возвращает русское название номинала.
+         *
          * @return русское название номинала
          */
         public String getDisplayName() {
@@ -82,6 +88,8 @@ public class Card {
         }
 
         /**
+         * Возвращает базовое количество очков карты.
+         *
          * @return базовое количество очков
          */
         public int getValue() {
@@ -104,6 +112,8 @@ public class Card {
     }
 
     /**
+     * Возвращает номинал карты.
+     *
      * @return номинал карты
      */
     public Rank getRank() {
@@ -111,6 +121,8 @@ public class Card {
     }
 
     /**
+     * Возвращает масть карты.
+     *
      * @return масть карты
      */
     public Suit getSuit() {
@@ -149,6 +161,8 @@ public class Card {
     }
 
     /**
+     * Возвращает строковое представление карты с базовым значением очков.
+     *
      * @return отображение карты с базовым значением очков
      */
     @Override

@@ -8,6 +8,8 @@ public class Player {
     private final Hand hand = new Hand();
 
     /**
+     * Возвращает руку участника.
+     *
      * @return рука участника
      */
     public Hand getHand() {
