@@ -46,7 +46,7 @@ public class BlackjackGame {
      * Проводит один раунд: раздача, ходы,
      * определение победителя.
      */
-    private void playRound() {
+    void playRound() {
         System.out.println("Раунд " + roundNumber);
 
         player.clearHand();
@@ -144,19 +144,16 @@ public class BlackjackGame {
     private void resolveWinner() {
         int playerTotal = player.getHand().total();
         int dealerTotal = dealer.getHand().total();
+        boolean dealerBust = dealer.getHand().isBust();
 
-        if (dealer.getHand().isBust()) {
+        String result = determineWinner(playerTotal, dealerTotal, dealerBust);
+
+        if ("PLAYER".equals(result)) {
             playerScore++;
-            System.out.println("У дилера перебор! Вы выиграли раунд! "
-                    + scoreString("в вашу пользу"));
-        } else if (playerTotal > dealerTotal) {
-            playerScore++;
-            System.out.println("Вы выиграли раунд! "
-                    + scoreString("в вашу пользу"));
-        } else if (playerTotal < dealerTotal) {
+            System.out.println("Вы выиграли раунд! " + scoreString("в вашу пользу"));
+        } else if ("DEALER".equals(result)) {
             dealerScore++;
-            System.out.println("Вы проиграли раунд! "
-                    + scoreString("в пользу дилера"));
+            System.out.println("Вы проиграли раунд! " + scoreString("в пользу дилера"));
         } else {
             System.out.println("Ничья! " + scoreString(""));
         }
@@ -173,16 +170,18 @@ public class BlackjackGame {
             printDealerHand(false);
         }
 
-        if (playerBlackjack && dealerBlackjack) {
-            System.out.println("У обоих блэкджек! Ничья. " + scoreString(""));
-        } else if (playerBlackjack) {
+        String outcome = determineBlackjackOutcome(playerBlackjack, dealerBlackjack);
+
+        if ("PLAYER".equals(outcome)) {
             playerScore++;
             System.out.println("У вас блэкджек! Вы выиграли раунд! "
                     + scoreString("в вашу пользу"));
-        } else {
+        } else if ("DEALER".equals(outcome)) {
             dealerScore++;
             System.out.println("У дилера блэкджек! Вы проиграли раунд. "
                     + scoreString("в пользу дилера"));
+        } else {
+            System.out.println("У обоих блэкджек! Ничья. " + scoreString(""));
         }
     }
 
@@ -237,7 +236,7 @@ public class BlackjackGame {
      * @param suffix добавляемый текст (может быть пустым).
      * @return строка вида "Счет A:B в вашу пользу.".
      */
-    private String scoreString(String suffix) {
+    String scoreString(String suffix) {
         String result = "Счет " + playerScore + ":" + dealerScore;
 
         if (suffix != null && !suffix.isEmpty()) {
@@ -245,5 +244,43 @@ public class BlackjackGame {
         }
 
         return result + ".";
+    }
+
+    /**
+     * Определяет победителя по очкам игрока и дилера.
+     *
+     * @param playerTotal очки игрока
+     * @param dealerTotal очки дилера
+     * @param dealerBust  перебрал ли дилер
+     * @return "PLAYER" / "DEALER" / "TIE"
+     */
+    String determineWinner(int playerTotal, int dealerTotal, boolean dealerBust) {
+        if (dealerBust) {
+            return "PLAYER";
+        }
+        if (playerTotal > dealerTotal) {
+            return "PLAYER";
+        }
+        if (playerTotal < dealerTotal) {
+            return "DEALER";
+        }
+        return "TIE";
+    }
+
+    /**
+     * Определяет исход при блэкджеках.
+     *
+     * @param playerBlackjack есть ли блэкджек у игрока
+     * @param dealerBlackjack есть ли блэкджек у дилера
+     * @return "PLAYER" / "DEALER" / "TIE"
+     */
+    String determineBlackjackOutcome(boolean playerBlackjack, boolean dealerBlackjack) {
+        if (playerBlackjack && dealerBlackjack) {
+            return "TIE";
+        }
+        if (playerBlackjack) {
+            return "PLAYER";
+        }
+        return "DEALER";
     }
 }
