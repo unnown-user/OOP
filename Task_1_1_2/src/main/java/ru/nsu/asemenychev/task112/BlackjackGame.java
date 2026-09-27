@@ -120,7 +120,7 @@ public class BlackjackGame {
         System.out.println("Ход дилера");
         System.out.println("-------");
 
-        Card hole = dealer.getHand().getCards().get(1);
+        Card hole = dealer.getHand().getCard(1);
         System.out.println("Дилер открывает закрытую карту " + hole);
 
         printPlayerHand();
@@ -223,7 +223,7 @@ public class BlackjackGame {
      */
     private void printDealerHand(boolean hideHole) {
         if (hideHole) {
-            Card first = dealer.getHand().getCards().get(0);
+            Card first = dealer.getHand().getCard(0);
             System.out.println("Карты дилера: [" + first + ", <закрытая карта>]");
         } else {
             System.out.println("Карты дилера: " + dealer.getHand());
