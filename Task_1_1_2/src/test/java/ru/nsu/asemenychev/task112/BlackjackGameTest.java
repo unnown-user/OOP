@@ -187,4 +187,63 @@ public class BlackjackGameTest {
         BlackjackGame game = newGame();
         assertEquals("Счет 0:0.", game.scoreString(null));
     }
+
+    private PrintStream originalOut;
+
+    @BeforeEach
+    void saveSystemOut() {
+        originalOut = System.out;
+    }
+
+    @AfterEach
+    void restoreSystemOut() {
+        System.setOut(originalOut);
+    }
+
+    @Test
+    void playRoundPrintsExpectedPhrasesWhenPlayerStops() {
+        String input = "0\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+
+        BlackjackGame game = new BlackjackGame(new Scanner(System.in));
+        game.playRound();
+
+        String output = out.toString();
+        assertTrue(output.contains("Раунд 1"));
+        assertTrue(output.contains("Дилер раздал карты"));
+        assertTrue(output.contains("Ваши карты:"));
+        assertTrue(output.contains("Карты дилера:"));
+        assertTrue(output.contains("Ваш ход"));
+        assertTrue(output.contains("Ход дилера"));
+    }
+
+    @Test
+    void playRoundWithPlayerTakingOneCard() {
+        String input = "1\n0\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+
+        BlackjackGame game = new BlackjackGame(new Scanner(System.in));
+        game.playRound();
+
+        String output = out.toString();
+        assertTrue(output.contains("Вы открыли карту"));
+    }
+
+    @Test
+    void playRoundHandlesInvalidInputThenStops() {
+        String input = "5\nfoo\n0\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+
+        BlackjackGame game = new BlackjackGame(new Scanner(System.in));
+        game.playRound();
+
+        String output = out.toString();
+        assertTrue(output.contains("Некорректный ввод"));
+    }
 }
