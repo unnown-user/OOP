@@ -7,10 +7,12 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -245,5 +247,21 @@ public class BlackjackGameTest {
 
         String output = out.toString();
         assertTrue(output.contains("Некорректный ввод"));
+    }
+
+    @Test
+    void playerBustsOnManyCards() {
+        String input = "1\n".repeat(12);
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+
+        BlackjackGame game = new BlackjackGame(new Scanner(System.in));
+
+        assertThrows(NoSuchElementException.class, game::play);
+
+        String output = out.toString();
+        assertTrue(output.contains("Перебор"));
+        assertTrue(output.contains("в пользу дилера"));
     }
 }
