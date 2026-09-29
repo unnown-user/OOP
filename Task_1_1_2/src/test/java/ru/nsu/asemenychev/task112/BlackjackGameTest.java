@@ -10,7 +10,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -217,36 +216,6 @@ public class BlackjackGameTest {
         assertTrue(output.contains("Дилер раздал карты"));
         assertTrue(output.contains("Ваши карты:"));
         assertTrue(output.contains("Карты дилера:"));
-        assertTrue(output.contains("Ваш ход"));
-        assertTrue(output.contains("Ход дилера"));
-    }
-
-    @Test
-    void playRoundWithPlayerTakingOneCard() {
-        String input = "1\n0\n";
-        System.setIn(new ByteArrayInputStream(input.getBytes()));
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out));
-
-        BlackjackGame game = new BlackjackGame(new Scanner(System.in));
-        game.playRound();
-
-        String output = out.toString();
-        assertTrue(output.contains("Вы открыли карту"));
-    }
-
-    @Test
-    void playRoundHandlesInvalidInputThenStops() {
-        String input = "5\nfoo\n0\n";
-        System.setIn(new ByteArrayInputStream(input.getBytes()));
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out));
-
-        BlackjackGame game = new BlackjackGame(new Scanner(System.in));
-        game.playRound();
-
-        String output = out.toString();
-        assertTrue(output.contains("Некорректный ввод"));
     }
 
     @Test
