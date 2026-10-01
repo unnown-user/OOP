@@ -1,4 +1,4 @@
-package ru.nsu.asemenychev.Task_1_1_3;
+package ru.nsu.asemenychev.task113;
 
 import java.util.HashMap;
 import java.util.Map;
