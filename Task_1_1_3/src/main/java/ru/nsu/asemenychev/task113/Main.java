@@ -1,17 +1,26 @@
 package ru.nsu.asemenychev.task113;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    static void main() {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        IO.println(String.format("Hello and welcome!"));
+    public static void main() {
+        // Пример из условия: 3 + (2*x)
+        Expression e = new Add(new Number(3), new Mul(new Number(2), new Variable("x")));
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            IO.println("i = " + i);
-        }
+        System.out.print("Выражение:     ");
+        e.print();
+
+        Expression de = e.derivative("x");
+        System.out.print("Производная:   ");
+        de.print();
+
+        System.out.print("Упрощённая:    ");
+        de.simplify().print();
+
+        int result = e.eval("x = 10; y = 13");
+        System.out.println("При x=10:      " + result);
+
+        // Разбор из строки
+        Expression parsed = ExpressionParser.parse("(3+(2*x))");
+        System.out.print("Из строки:     ");
+        parsed.print();
     }
 }
