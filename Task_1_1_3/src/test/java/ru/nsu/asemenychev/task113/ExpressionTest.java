@@ -87,9 +87,15 @@ class ExpressionTest {
     }
 
     @Test
-    void fullExampleFromTask() {
+    void derivativeOfAddAndMul() {
         Expression e = new Add(new Number(3), new Mul(new Number(2), new Variable("x")));
         assertEquals("(0+((0*x)+(2*1)))", e.derivative("x").toString());
+    }
+
+    @Test
+    void derivativeOfSubAndDiv() {
+        Expression e = new Sub(new Number(4), new Div(new Number(5), new Variable("y")));
+        assertEquals("(0-(((0*y)-(5*1))/(y*y)))", e.derivative("y").toString());
     }
 
     @Test
@@ -149,7 +155,7 @@ class ExpressionTest {
     }
 
     @Test
-    void simplifyDerivativeOfTask() {
+    void simplifyDerivativeOfAddAndMul() {
         Expression e = new Add(new Number(3), new Mul(new Number(2), new Variable("x")));
         assertEquals("2", e.derivative("x").simplify().toString());
     }
@@ -161,17 +167,26 @@ class ExpressionTest {
     }
 
     @Test
+    void addWorks() {
+        assertEquals(9, new Add(new Number(2), new Number(7)).eval(""));
+    }
+
+    @Test
     void subWorks() {
-        assertEquals(7, new Sub(new Number(10), new Number(3)).eval(""));
+        assertEquals(8, new Sub(new Number(11), new Number(3)).eval(""));
+    }
+    @Test
+    void mulWorks() {
+        assertEquals(15, new Mul(new Number(5), new Number(3)).eval(""));
     }
 
     @Test
     void divWorks() {
-        assertEquals(3, new Div(new Number(10), new Number(3)).eval(""));
+        assertEquals(6, new Div(new Number(20), new Number(3)).eval(""));
     }
 
     @Test
     void parserThrowsOnMissingParen() {
-        assertThrows(IllegalArgumentException.class, () -> ExpressionParser.parse("(3+2"));
+        assertThrows(IllegalArgumentException.class, () -> ExpressionParser.parse("(3+2*4/6-1"));
     }
 }
