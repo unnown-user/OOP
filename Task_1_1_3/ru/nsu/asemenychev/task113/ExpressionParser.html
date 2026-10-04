@@ -76,9 +76,14 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">ExpressionParser</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Разборщик выражений из строки.
- Каждое бинарное выражение записывается в скобках: "(3+(2*x))".
- Пробелы игнорируются.</div>
+<div class="block">Разборщик математических выражений из строки.
+
+ <p>Поддерживает два стиля записи:
+ <ul>
+     <li>со скобками вокруг каждой операции — <code>(3+(2*x))</code>;</li>
+     <li>без скобок, с обычным математическим приоритетом — <code>3+2*x</code>.</li>
+ </ul>
+ Пробелы игнорируются. Приоритет операций: <code>* /</code> выше, чем <code>+ -</code>.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
