@@ -1,11 +1,13 @@
 package ru.nsu.asemenychev.task113;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
 class ExpressionTest {
+
 
     // ---Печать (toString)---
 
@@ -31,6 +33,7 @@ class ExpressionTest {
         assertEquals("(4-(5/y))", e.toString());
     }
 
+
     // ---Вычисление (eval)---
 
     @Test
@@ -49,6 +52,7 @@ class ExpressionTest {
         Expression e = new Variable("x");
         assertThrows(IllegalArgumentException.class, () -> e.eval("y = 5"));
     }
+
 
     // ---Вычисление производных---
 
@@ -103,6 +107,7 @@ class ExpressionTest {
         assertEquals("(0-(((0*y)-(5*1))/(y*y)))", e.derivative("y").toString());
     }
 
+
     // ---Парсинг---
 
     @Test
@@ -136,6 +141,7 @@ class ExpressionTest {
         assertEquals("((a+b)*(c-d))", e.toString());
     }
 
+    // Пункт 1 (Дополнительный). Парсинг без скобок.
     @Test
     void parserWithoutParensPrecedence() {
         assertEquals("(2+(3*4))", ExpressionParser.parse("2+3*4").toString());
@@ -151,43 +157,21 @@ class ExpressionTest {
         assertEquals("((2+3)/4)", ExpressionParser.parse("(2+3)/4").toString());
     }
 
+    @Test
+    void parserMixedOperations() {
+        assertEquals("((2+(3*4))-(5/2))", ExpressionParser.parse("2+3*4-5/2").toString());
+    }
+
+    @Test
+    void parserLeftAssociativeSub() {
+        assertEquals("((10-3)-2)", ExpressionParser.parse("10-3-2").toString());
+    }
+    // Конец Пункта 1.
+
+
     // ---Упрощение выражений---
 
-    @Test
-    void simplifyMulIfFirstSummandIsZero() {
-        assertEquals("x", new Add(new Number(0), new Variable("x")).simplify().toString());
-    }
-
-    @Test
-    void simplifyMulIfSecondSummandIsZero() {
-        assertEquals("x", new Add(new Variable("x"), new Number(0)).simplify().toString());
-    }
-
-    @Test
-    void simplifyMulIfFirstMultiplierIsZero() {
-        assertEquals("0", new Mul(new Number(0), new Variable("x")).simplify().toString());
-    }
-
-    @Test
-    void simplifyMulIfSecondMultiplierIsZero() {
-        assertEquals("0", new Mul(new Variable("x"), new Number(0)).simplify().toString());
-    }
-
-    @Test
-    void simplifyMulIfFirstMultiplierIsOne() {
-        assertEquals("x", new Mul(new Number(1), new Variable("x")).simplify().toString());
-    }
-
-    @Test
-    void simplifyMulIfSecondMultiplierIsOne() {
-        assertEquals("x", new Mul(new Variable("x"), new Number(1)).simplify().toString());
-    }
-
-    @Test
-    void simplifySubSame() {
-        assertEquals("0", new Sub(new Variable("x"), new Variable("x")).simplify().toString());
-    }
-
+    // Пункт 2a (Дополнительный). Сворачивание констант.
     @Test
     void simplifyAddConstants() {
         assertEquals("5", new Add(new Number(2), new Number(3)).simplify().toString());
@@ -209,6 +193,23 @@ class ExpressionTest {
     }
 
     @Test
+    void simplifyDeepConstantExpression() {
+        Expression e = new Mul(
+                new Add(new Number(2), new Number(3)),
+                new Sub(new Number(4), new Number(1)));
+        assertEquals("15", e.simplify().toString());
+    }
+
+    @Test
+    void simplifyComplexConstantExpression() {
+        Expression e = new Sub(
+                new Mul(new Add(new Number(1), new Number(2)),
+                        new Add(new Number(3), new Number(4))),
+                new Number(5));
+        assertEquals("16", e.simplify().toString());
+    }
+
+    @Test
     void simplifyDerivativeOfAddAndMul() {
         Expression e = new Add(new Number(3), new Mul(new Number(2), new Variable("x")));
         assertEquals("2", e.derivative("x").simplify().toString());
@@ -219,14 +220,92 @@ class ExpressionTest {
         Expression e = new Sub(new Number(4), new Div(new Number(5), new Variable("y")));
         assertEquals("(0-(-5/(y*y)))", e.derivative("y").simplify().toString());
     }
+    // Конец Пункта 2a.
 
-    // ---Отслеживание деления на ноль---
+    @Test
+    void simplifyAddIfFirstSummandIsZero() {
+        assertEquals("x", new Add(new Number(0), new Variable("x")).simplify().toString());
+    }
+
+    @Test
+    void simplifyAddIfSecondSummandIsZero() {
+        assertEquals("x", new Add(new Variable("x"), new Number(0)).simplify().toString());
+    }
+
+    // Пункт 2b (Дополнительный). Умножение на 0.
+    @Test
+    void simplifyMulIfFirstMultiplierIsZero() {
+        assertEquals("0", new Mul(new Number(0), new Variable("x")).simplify().toString());
+    }
+
+    @Test
+    void simplifyMulIfSecondMultiplierIsZero() {
+        assertEquals("0", new Mul(new Variable("x"), new Number(0)).simplify().toString());
+    }
+    // Конец Пункта 2b.
+
+    // Пункт 2c (Дополнительный). Умножение на 1.
+    @Test
+    void simplifyMulIfFirstMultiplierIsOne() {
+        assertEquals("x", new Mul(new Number(1), new Variable("x")).simplify().toString());
+    }
+
+    @Test
+    void simplifyMulIfSecondMultiplierIsOne() {
+        assertEquals("x", new Mul(new Variable("x"), new Number(1)).simplify().toString());
+    }
+    // Конец Пункта 2c.
+
+    // Пункт 2d (Дополнительный). Вычитание одинаковых.
+    @Test
+    void simplifySubSame() {
+        assertEquals("0", new Sub(new Variable("x"), new Variable("x")).simplify().toString());
+    }
+
+    @Test
+    void simplifySubSameComplexExpression() {
+        Expression inner = new Add(new Variable("x"), new Number(1));
+        Expression e = new Sub(inner, inner);
+        assertEquals("0", e.simplify().toString());
+    }
+
+    @Test
+    void simplifySubStructurallyEqual() {
+        Expression a = new Mul(new Number(2), new Variable("x"));
+        Expression b = new Mul(new Number(2), new Variable("x"));
+        assertEquals("0", new Sub(a, b).simplify().toString());
+    }
+    // Конец Пункта 2d.
+
+    // Проверка условия "Упрощение не меняет исходное выражение,
+    // а создает новое (упрощенное) выражение по заданному".
+    @Test
+    void simplifyDoesNotModifyOriginal() {
+        Expression original = new Add(new Number(2), new Number(3));
+        Expression simplified = original.simplify();
+        assertEquals("(2+3)", original.toString());
+        assertEquals("5", simplified.toString());
+        assertNotSame(original, simplified);
+    }
+
+    @Test
+    void simplifyDoesNotModifyComplexOriginal() {
+        Expression original = new Mul(new Number(0), new Variable("x"));
+        Expression simplified = original.simplify();
+        assertEquals("(0*x)", original.toString());
+        assertEquals("0", simplified.toString());
+    }
+    // Конец Проверки.
+
+
+    // ---Отслеживание попыток деления на ноль---
 
     @Test
     void evalDivByZero() {
         Expression e = new Div(new Number(1), new Number(0));
         assertThrows(ArithmeticException.class, () -> e.eval(""));
     }
+
 
     // ---Проверка работы арифметических выражений---
 
@@ -239,6 +318,7 @@ class ExpressionTest {
     void subWorks() {
         assertEquals(8, new Sub(new Number(11), new Number(3)).eval(""));
     }
+
     @Test
     void mulWorks() {
         assertEquals(15, new Mul(new Number(5), new Number(3)).eval(""));
@@ -249,7 +329,7 @@ class ExpressionTest {
         assertEquals(6, new Div(new Number(20), new Number(3)).eval(""));
     }
 
-    // ---Отслеживание непарности скобок---
+    // ---Отслеживание непарных скобок---
 
     @Test
     void parserThrowsOnMissingClosingParen() {
