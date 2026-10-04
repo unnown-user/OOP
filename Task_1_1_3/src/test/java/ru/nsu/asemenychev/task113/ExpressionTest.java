@@ -18,9 +18,15 @@ class ExpressionTest {
     }
 
     @Test
-    void printComplexExpression() {
+    void printComplexExpressionWithMulAndAdd() {
         Expression e = new Add(new Number(3), new Mul(new Number(2), new Variable("x")));
         assertEquals("(3+(2*x))", e.toString());
+    }
+
+    @Test
+    void printComplexExpressionWithDivAndSub() {
+        Expression e = new Sub(new Number(4), new Div(new Number(5), new Variable("y")));
+        assertEquals("(4-(5/y))", e.toString());
     }
 
     @Test
