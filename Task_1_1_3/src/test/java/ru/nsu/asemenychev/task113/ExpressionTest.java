@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 
 class ExpressionTest {
 
+    // ---Печать (toString)---
+
     @Test
     void printNumber() {
         assertEquals("42", new Number(42).toString());
@@ -29,6 +31,8 @@ class ExpressionTest {
         assertEquals("(4-(5/y))", e.toString());
     }
 
+    // ---Вычисление (eval)---
+
     @Test
     void evalComplexExpression() {
         Expression e = new Add(new Number(3), new Mul(new Number(2), new Variable("x")));
@@ -45,6 +49,8 @@ class ExpressionTest {
         Expression e = new Variable("x");
         assertThrows(IllegalArgumentException.class, () -> e.eval("y = 5"));
     }
+
+    // ---Вычисление производных---
 
     @Test
     void derivativeOfNumberIsZero() {
@@ -82,8 +88,7 @@ class ExpressionTest {
     @Test
     void derivativeOfDiv() {
         Expression e = new Div(new Variable("x"), new Variable("y"));
-        assertEquals("(((1*y)-(x*0))*(y*y))".replace("*(y*y)", "/(y*y)"),
-                e.derivative("x").toString());
+        assertEquals("(((1*y)-(x*0))/(y*y))", e.derivative("x").toString());
     }
 
     @Test
@@ -97,6 +102,8 @@ class ExpressionTest {
         Expression e = new Sub(new Number(4), new Div(new Number(5), new Variable("y")));
         assertEquals("(0-(((0*y)-(5*1))/(y*y)))", e.derivative("y").toString());
     }
+
+    // ---Парсинг---
 
     @Test
     void parserBasic() {
@@ -130,18 +137,50 @@ class ExpressionTest {
     }
 
     @Test
-    void simplifyAddZero() {
+    void parserWithoutParensPrecedence() {
+        assertEquals("(2+(3*4))", ExpressionParser.parse("2+3*4").toString());
+    }
+
+    @Test
+    void parserWithoutParensLeftAssociative() {
+        assertEquals("((1+2)+3)", ExpressionParser.parse("1+2+3").toString());
+    }
+
+    @Test
+    void parserWithParensOverrides() {
+        assertEquals("((2+3)/4)", ExpressionParser.parse("(2+3)/4").toString());
+    }
+
+    // ---Упрощение выражений---
+
+    @Test
+    void simplifyMulIfFirstSummandIsZero() {
         assertEquals("x", new Add(new Number(0), new Variable("x")).simplify().toString());
     }
 
     @Test
-    void simplifyMulZero() {
+    void simplifyMulIfSecondSummandIsZero() {
+        assertEquals("x", new Add(new Variable("x"), new Number(0)).simplify().toString());
+    }
+
+    @Test
+    void simplifyMulIfFirstMultiplierIsZero() {
         assertEquals("0", new Mul(new Number(0), new Variable("x")).simplify().toString());
     }
 
     @Test
-    void simplifyMulOne() {
+    void simplifyMulIfSecondMultiplierIsZero() {
+        assertEquals("0", new Mul(new Variable("x"), new Number(0)).simplify().toString());
+    }
+
+    @Test
+    void simplifyMulIfFirstMultiplierIsOne() {
         assertEquals("x", new Mul(new Number(1), new Variable("x")).simplify().toString());
+    }
+
+    @Test
+    void simplifyMulIfSecondMultiplierIsOne() {
+        assertEquals("x", new Mul(new Variable("x"), new Number(1)).simplify().toString());
     }
 
     @Test
@@ -150,8 +189,23 @@ class ExpressionTest {
     }
 
     @Test
-    void simplifyConstants() {
+    void simplifyAddConstants() {
         assertEquals("5", new Add(new Number(2), new Number(3)).simplify().toString());
+    }
+
+    @Test
+    void simplifySubConstants() {
+        assertEquals("6", new Sub(new Number(10), new Number(4)).simplify().toString());
+    }
+
+    @Test
+    void simplifyMulConstants() {
+        assertEquals("16", new Mul(new Number(4), new Number(4)).simplify().toString());
+    }
+
+    @Test
+    void simplifyDivConstants() {
+        assertEquals("3", new Div(new Number(9), new Number(3)).simplify().toString());
     }
 
     @Test
@@ -161,10 +215,20 @@ class ExpressionTest {
     }
 
     @Test
+    void simplifyDerivativeOfSubAndDiv() {
+        Expression e = new Sub(new Number(4), new Div(new Number(5), new Variable("y")));
+        assertEquals("(0-(-5/(y*y)))", e.derivative("y").simplify().toString());
+    }
+
+    // ---Отслеживание деления на ноль---
+
+    @Test
     void evalDivByZero() {
         Expression e = new Div(new Number(1), new Number(0));
         assertThrows(ArithmeticException.class, () -> e.eval(""));
     }
+
+    // ---Проверка работы арифметических выражений---
 
     @Test
     void addWorks() {
@@ -185,8 +249,15 @@ class ExpressionTest {
         assertEquals(6, new Div(new Number(20), new Number(3)).eval(""));
     }
 
+    // ---Отслеживание непарности скобок---
+
     @Test
-    void parserThrowsOnMissingParen() {
+    void parserThrowsOnMissingClosingParen() {
         assertThrows(IllegalArgumentException.class, () -> ExpressionParser.parse("(3+2*4/6-1"));
+    }
+
+    @Test
+    void parserThrowsOnMissingOpeningParen() {
+        assertThrows(IllegalArgumentException.class, () -> ExpressionParser.parse("3+2*4/6-1)"));
     }
 }

@@ -1,9 +1,14 @@
 package ru.nsu.asemenychev.task113;
 
 /**
- * Разборщик выражений из строки.
- * Каждое бинарное выражение записывается в скобках: "(3+(2*x))".
- * Пробелы игнорируются.
+ * Разборщик математических выражений из строки.
+ *
+ * <p>Поддерживает два стиля записи:
+ * <ul>
+ *     <li>со скобками вокруг каждой операции — {@code (3+(2*x))};</li>
+ *     <li>без скобок, с обычным математическим приоритетом — {@code 3+2*x}.</li>
+ * </ul>
+ * Пробелы игнорируются. Приоритет операций: {@code * /} выше, чем {@code + -}.
  */
 public class ExpressionParser {
 
@@ -24,7 +29,7 @@ public class ExpressionParser {
      */
     public static Expression parse(String input) {
         ExpressionParser parser = new ExpressionParser(input);
-        Expression result = parser.parseExpression();
+        Expression result = parser.parseAdditive();
         parser.skipWhitespace();
         if (parser.pos < input.length()) {
             throw new IllegalArgumentException("Лишние символы на позиции " + parser.pos);
@@ -32,32 +37,60 @@ public class ExpressionParser {
         return result;
     }
 
-    private Expression parseExpression() {
+    /**
+     * Разбирает сумму и разность: {@code term (('+' | '-') term)*}.
+     */
+    private Expression parseAdditive() {
+        Expression left = parseMultiplicative();
+        while (true) {
+            skipWhitespace();
+            char c = peek();
+            if (c != '+' && c != '-') {
+                break;
+            }
+            pos++;
+            Expression right = parseMultiplicative();
+            left = (c == '+') ? new Add(left, right) : new Sub(left, right);
+        }
+        return left;
+    }
+
+    /**
+     * Разбирает произведение и частное: {@code factor (('*' | '/') factor)*}.
+     */
+    private Expression parseMultiplicative() {
+        Expression left = parseFactor();
+        while (true) {
+            skipWhitespace();
+            char c = peek();
+            if (c != '*' && c != '/') {
+                break;
+            }
+            pos++;
+            Expression right = parseFactor();
+            left = (c == '*') ? new Mul(left, right) : new Div(left, right);
+        }
+        return left;
+    }
+
+    /**
+     * Разбирает множитель: скобочную группу, константу или переменную.
+     */
+    private Expression parseFactor() {
         skipWhitespace();
         if (peek() == '(') {
-            return parseBinary();
+            pos++;
+            Expression inner = parseAdditive();
+            skipWhitespace();
+            expect(')');
+            return inner;
         }
         return parseAtomic();
     }
 
-    private Expression parseBinary() {
-        expect('(');
-        Expression left = parseExpression();
-        skipWhitespace();
-        char op = next();
-        Expression right = parseExpression();
-        skipWhitespace();
-        expect(')');
-
-        return switch (op) {
-            case '+' -> new Add(left, right);
-            case '-' -> new Sub(left, right);
-            case '*' -> new Mul(left, right);
-            case '/' -> new Div(left, right);
-            default -> throw new IllegalArgumentException("Неизвестный оператор: " + op);
-        };
-    }
-
+    /**
+     * Разбирает константу или переменную.
+     */
     private Expression parseAtomic() {
         skipWhitespace();
         StringBuilder sb = new StringBuilder();
@@ -100,13 +133,6 @@ public class ExpressionParser {
 
     private char peek() {
         return pos < input.length() ? input.charAt(pos) : '\0';
-    }
-
-    private char next() {
-        if (pos >= input.length()) {
-            throw new IllegalArgumentException("Неожиданный конец строки");
-        }
-        return input.charAt(pos++);
     }
 
     private void expect(char c) {
