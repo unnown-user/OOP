@@ -10,6 +10,8 @@ public class Number extends Expression {
     private final int value;
 
     /**
+     * Создаёт числовую константу с заданным значением.
+     *
      * @param value значение константы
      */
     public Number(int value) {
@@ -17,6 +19,8 @@ public class Number extends Expression {
     }
 
     /**
+     * Возвращает значение константы.
+     *
      * @return значение константы
      */
     public int getValue() {

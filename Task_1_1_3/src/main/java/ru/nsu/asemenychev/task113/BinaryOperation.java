@@ -13,6 +13,8 @@ public abstract class BinaryOperation extends Expression {
     private final String symbol;
 
     /**
+     * Создаёт бинарную операцию с двумя операндами и символом операции.
+     *
      * @param left   левый операнд
      * @param right  правый операнд
      * @param symbol символ операции для печати

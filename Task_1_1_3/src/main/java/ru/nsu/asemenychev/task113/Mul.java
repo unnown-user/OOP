@@ -6,6 +6,8 @@ package ru.nsu.asemenychev.task113;
 public class Mul extends BinaryOperation {
 
     /**
+     * Создаёт произведение двух выражений.
+     *
      * @param left  левый множитель
      * @param right правый множитель
      */

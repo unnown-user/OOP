@@ -10,6 +10,8 @@ public class Variable extends Expression {
     private final String name;
 
     /**
+     * Создаёт переменную с заданным именем.
+     *
      * @param name имя переменной
      */
     public Variable(String name) {
@@ -17,6 +19,8 @@ public class Variable extends Expression {
     }
 
     /**
+     * Возвращает имя переменной.
+     *
      * @return имя переменной
      */
     public String getName() {

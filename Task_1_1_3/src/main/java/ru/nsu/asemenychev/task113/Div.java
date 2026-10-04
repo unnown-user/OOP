@@ -6,6 +6,8 @@ package ru.nsu.asemenychev.task113;
 public class Div extends BinaryOperation {
 
     /**
+     * Создаёт частное двух выражений.
+     *
      * @param left  делимое
      * @param right делитель
      */

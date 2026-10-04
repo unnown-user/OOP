@@ -6,6 +6,8 @@ package ru.nsu.asemenychev.task113;
 public class Add extends BinaryOperation {
 
     /**
+     * Создаёт сумму двух выражений.
+     *
      * @param left  левое слагаемое
      * @param right правое слагаемое
      */

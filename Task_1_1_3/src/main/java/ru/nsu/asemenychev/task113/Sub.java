@@ -6,6 +6,8 @@ package ru.nsu.asemenychev.task113;
 public class Sub extends BinaryOperation {
 
     /**
+     * Создаёт разность двух выражений.
+     *
      * @param left  уменьшаемое
      * @param right вычитаемое
      */
