@@ -1,9 +1,9 @@
 package ru.nsu.asemenychev.task113;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * Тесты для дополнительного задания.
