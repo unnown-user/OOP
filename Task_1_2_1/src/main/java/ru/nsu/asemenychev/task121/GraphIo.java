@@ -8,17 +8,21 @@ import java.nio.file.Path;
 import java.util.function.Supplier;
 
 /**
- * Чтение графа из файла фиксированного формата.
+ * Утилитарный класс для чтения графа из файла фиксированного формата.
+ * Создание экземпляров запрещено.
  */
-public final class GraphIO {
+public final class GraphIo {
 
-    private GraphIO() {
+    /**
+     * Приватный конструктор, чтобы запретить создание экземпляров.
+     */
+    private GraphIo() {
     }
 
     /**
      * Читает граф из файла.
      *
-     * @param path путь к файлу
+     * @param path         путь к файлу
      * @param graphFactory функция-конструктор нужной реализации графа
      * @return построенный граф
      * @throws IOException при ошибке ввода-вывода
@@ -27,14 +31,25 @@ public final class GraphIO {
             throws IOException {
         try (BufferedReader reader = Files.newBufferedReader(
                 Path.of(path), StandardCharsets.UTF_8)) {
+
             Graph graph = graphFactory.get();
 
-            int vertexCount = Integer.parseInt(reader.readLine().trim());
+            String line = reader.readLine();
+            if (line == null) {
+                throw new IOException("Файл пуст");
+            }
+            int vertexCount = Integer.parseInt(line.trim());
+
             for (int i = 0; i < vertexCount; i++) {
                 graph.addVertex(reader.readLine().trim());
             }
 
-            int edgeCount = Integer.parseInt(reader.readLine().trim());
+            String edgeCountLine = reader.readLine();
+            if (edgeCountLine == null) {
+                throw new IOException("Ожидалось количество рёбер");
+            }
+            int edgeCount = Integer.parseInt(edgeCountLine.trim());
+
             for (int i = 0; i < edgeCount; i++) {
                 String[] parts = reader.readLine().trim().split("\\s+");
                 if (parts.length != 2) {

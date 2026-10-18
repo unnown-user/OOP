@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -153,12 +152,95 @@ class GraphTest {
         java.nio.file.Files.writeString(tmp,
                 "3\nA\nB\nC\n2\nA B\nB C\n");
 
-        Graph g = GraphIO.readFromFile(tmp.toString(), AdjacencyListGraph::new);
+        Graph g = GraphIo.readFromFile(tmp.toString(), AdjacencyListGraph::new);
         assertEquals(3, g.vertexCount());
         assertEquals(2, g.edgeCount());
         assertTrue(g.hasEdge("A", "B"));
         assertTrue(g.hasEdge("B", "C"));
 
         java.nio.file.Files.deleteIfExists(tmp);
+    }
+
+
+    @Test
+    void dfsSortsLinearGraphCorrectly() {
+        Graph g = new AdjacencyListGraph();
+        g.addVertex("A");
+        g.addVertex("B");
+        g.addVertex("C");
+        g.addEdge("A", "B");
+        g.addEdge("B", "C");
+
+        TopologicalSorter sorter = new DfsSorter();
+        List<String> order = sorter.sort(g);
+
+        assertEquals(3, order.size());
+        assertTrue(order.indexOf("A") < order.indexOf("B"));
+        assertTrue(order.indexOf("B") < order.indexOf("C"));
+    }
+
+    @Test
+    void dfsSortsBranchingGraphCorrectly() {
+        Graph g = new AdjacencyMatrixGraph();
+        g.addVertex("A");
+        g.addVertex("B");
+        g.addVertex("C");
+        g.addVertex("D");
+        g.addEdge("A", "B");
+        g.addEdge("A", "C");
+        g.addEdge("B", "D");
+        g.addEdge("C", "D");
+
+        TopologicalSorter sorter = new DfsSorter();
+        List<String> order = sorter.sort(g);
+
+        assertEquals(4, order.size());
+        assertTrue(order.indexOf("A") < order.indexOf("B"));
+        assertTrue(order.indexOf("A") < order.indexOf("C"));
+        assertTrue(order.indexOf("B") < order.indexOf("D"));
+        assertTrue(order.indexOf("C") < order.indexOf("D"));
+    }
+
+    @Test
+    void dfsSortsDisconnectedGraphCorrectly() {
+        Graph g = new IncidenceMatrixGraph();
+        g.addVertex("A");
+        g.addVertex("B");
+        g.addVertex("C");
+        g.addVertex("D");
+        g.addEdge("A", "B");
+        g.addEdge("C", "D");
+
+        TopologicalSorter sorter = new DfsSorter();
+        List<String> order = sorter.sort(g);
+
+        assertEquals(4, order.size());
+        assertTrue(order.indexOf("A") < order.indexOf("B"));
+        assertTrue(order.indexOf("C") < order.indexOf("D"));
+    }
+
+    @Test
+    void dfsSortThrowsExceptionOnCycle() {
+        Graph g = new AdjacencyListGraph();
+        g.addVertex("A");
+        g.addVertex("B");
+        g.addVertex("C");
+        g.addEdge("A", "B");
+        g.addEdge("B", "C");
+        g.addEdge("C", "A"); // Цикл!
+
+        TopologicalSorter sorter = new DfsSorter();
+
+        assertThrows(IllegalStateException.class, () -> sorter.sort(g));
+    }
+
+    @Test
+    void dfsSortEmptyGraphReturnsEmptyList() {
+        Graph g = new AdjacencyListGraph();
+        TopologicalSorter sorter = new DfsSorter();
+
+        List<String> order = sorter.sort(g);
+
+        assertTrue(order.isEmpty());
     }
 }

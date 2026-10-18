@@ -1,9 +1,7 @@
 package ru.nsu.asemenychev.task121;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Граф в виде матрицы инцидентности {@code int[V][E]}.

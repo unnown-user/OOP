@@ -1,7 +1,5 @@
 package ru.nsu.asemenychev.task121;
 
-import java.util.List;
-
 /**
  * Демонстрация работы с графами и топологической сортировкой.
  */
@@ -86,7 +84,7 @@ public class Main {
             java.nio.file.Path tmp = java.nio.file.Files.createTempFile("test-graph", ".txt");
             java.nio.file.Files.writeString(tmp, "3\nA\nB\nC\n2\nA B\nB C\n");
 
-            Graph fromFile = GraphIO.readFromFile(tmp.toString(), AdjacencyListGraph::new);
+            Graph fromFile = GraphIo.readFromFile(tmp.toString(), AdjacencyListGraph::new);
             System.out.println("Успешно прочитан граф из файла:");
             System.out.println(fromFile);
 
