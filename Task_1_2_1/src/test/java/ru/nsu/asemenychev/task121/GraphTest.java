@@ -14,7 +14,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 /**
  * Тесты для всех реализаций {@link Graph}.
- * Один и тот же сценарий прогоняется для всех трёх типов графа.
+ * Один и тот же сценарий прогоняется для всех трех типов графа.
  */
 class GraphTest {
 
@@ -242,5 +242,38 @@ class GraphTest {
         List<String> order = sorter.sort(g);
 
         assertTrue(order.isEmpty());
+    }
+
+
+    @Test
+    void factoryCreatesMatrixGraph() {
+        Supplier<Graph> factory = GraphFactory.byType("matrix");
+        Graph graph = factory.get();
+        assertTrue(graph instanceof AdjacencyMatrixGraph);
+    }
+
+    @Test
+    void factoryCreatesListGraph() {
+        Supplier<Graph> factory = GraphFactory.byType("list");
+        Graph graph = factory.get();
+        assertTrue(graph instanceof AdjacencyListGraph);
+    }
+
+    @Test
+    void factoryCreatesIncidenceGraph() {
+        Supplier<Graph> factory = GraphFactory.byType("incidence");
+        Graph graph = factory.get();
+        assertTrue(graph instanceof IncidenceMatrixGraph);
+    }
+
+    @Test
+    void factoryIsCaseInsensitive() {
+        assertTrue(GraphFactory.byType("MATRIX").get() instanceof AdjacencyMatrixGraph);
+        assertTrue(GraphFactory.byType("List").get() instanceof AdjacencyListGraph);
+    }
+
+    @Test
+    void factoryThrowsOnUnknownType() {
+        assertThrows(IllegalArgumentException.class, () -> GraphFactory.byType("unknown"));
     }
 }
