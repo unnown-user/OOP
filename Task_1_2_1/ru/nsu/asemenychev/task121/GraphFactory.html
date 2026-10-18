@@ -76,9 +76,20 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">GraphFactory</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Фабрика реализаций графа. Позволяет выбрать тип графа
- по строковому имени — полезно при чтении из файла
- или при добавлении новых реализаций.</div>
+<div class="block">Фабрика реализаций графа. Позволяет выбрать
+ тип графа по строковому имени — для чтения
+ из файла или добавлении новых реализаций.
+
+ <p>Класс инкапсулирует логику выбора и создания конкретного
+ типа графа. Благодаря этому клиентский код не зависит от
+ конкретных классов реализаций (<code>AdjacencyMatrixGraph</code>,
+ <code>AdjacencyListGraph</code> и т.д.).
+
+ <p>Это нужно для расширяемости: если в будущем потребуется
+ добавить новое представление графа (например, на основе списка ребер),
+ достаточно будет создать новый класс <code>EdgeListGraph</code> и добавить
+ одну строку в метод <a href="#byType(java.lang.String)"><code>byType(String)</code></a>. Весь остальной код,
+ который работает с графами через этот интерфейс, менять не придется.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
