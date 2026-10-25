@@ -5,17 +5,14 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
  * Утилитарный класс для чтения графа из файла фиксированного формата.
- * Создание экземпляров запрещено.
  */
 public final class GraphIo {
 
-    /**
-     * Приватный конструктор, чтобы запретить создание экземпляров.
-     */
     private GraphIo() {
     }
 
@@ -23,16 +20,21 @@ public final class GraphIo {
      * Читает граф из файла.
      *
      * @param path         путь к файлу
-     * @param graphFactory функция-конструктор нужной реализации графа
+     * @param graphFactory функция, создающая пустой граф нужного типа
+     * @param vertexParser функция преобразования строки из файла в тип вершины T
+     * @param <T>          тип вершин
      * @return построенный граф
      * @throws IOException при ошибке ввода-вывода
      */
-    public static Graph readFromFile(String path, Supplier<Graph> graphFactory)
-            throws IOException {
+    public static <T> Graph<T> readFromFile(
+            String path,
+            Supplier<Graph<T>> graphFactory,
+            Function<String, T> vertexParser) throws IOException {
+
         try (BufferedReader reader = Files.newBufferedReader(
                 Path.of(path), StandardCharsets.UTF_8)) {
 
-            Graph graph = graphFactory.get();
+            Graph<T> graph = graphFactory.get();
 
             String line = reader.readLine();
             if (line == null) {
@@ -41,7 +43,7 @@ public final class GraphIo {
             int vertexCount = Integer.parseInt(line.trim());
 
             for (int i = 0; i < vertexCount; i++) {
-                graph.addVertex(reader.readLine().trim());
+                graph.addVertex(vertexParser.apply(reader.readLine().trim()));
             }
 
             String edgeCountLine = reader.readLine();
@@ -53,10 +55,9 @@ public final class GraphIo {
             for (int i = 0; i < edgeCount; i++) {
                 String[] parts = reader.readLine().trim().split("\\s+");
                 if (parts.length != 2) {
-                    throw new IOException("Ожидалось 'откуда куда', получено: "
-                            + String.join(" ", parts));
+                    throw new IOException("Ожидалось 'откуда куда'");
                 }
-                graph.addEdge(parts[0], parts[1]);
+                graph.addEdge(vertexParser.apply(parts[0]), vertexParser.apply(parts[1]));
             }
             return graph;
         }

@@ -9,39 +9,41 @@ import java.util.Set;
 
 /**
  * Топологическая сортировка на основе поиска в глубину (DFS).
+ *
+ * @param <T> тип вершин
  */
-public class DfsSorter implements TopologicalSorter {
+public class DfsSorter<T> implements TopologicalSorter<T> {
 
     @Override
-    public List<String> sort(Graph graph) {
-        Set<String> visited = new HashSet<>();
-        Set<String> visiting = new HashSet<>();
-        Deque<String> stack = new ArrayDeque<>();
+    public List<T> sort(Graph<T> graph) {
+        Set<T> visited = new HashSet<>();
+        Set<T> visiting = new HashSet<>();
+        Deque<T> stack = new ArrayDeque<>();
 
-        for (String v : graph.getVertices()) {
+        for (T v : graph.getVertices()) {
             if (!visited.contains(v)) {
                 dfs(graph, v, visited, visiting, stack);
             }
         }
 
-        List<String> result = new ArrayList<>();
+        List<T> result = new ArrayList<>();
         while (!stack.isEmpty()) {
             result.add(stack.pop());
         }
         return result;
     }
 
-    private void dfs(Graph graph, String v, Set<String> visited,
-                     Set<String> visiting, Deque<String> stack) {
+    private void dfs(Graph<T> graph, T v, Set<T> visited,
+                     Set<T> visiting, Deque<T> stack) {
         if (visiting.contains(v)) {
-            throw new IllegalStateException("Граф содержит цикл — сортировка невозможна");
+            throw new IllegalStateException("Граф содержит цикл");
         }
         if (visited.contains(v)) {
             return;
         }
 
         visiting.add(v);
-        for (String u : graph.getNeighbors(v)) {
+        for (T u : graph.getNeighbors(v)) {
             dfs(graph, u, visited, visiting, stack);
         }
         visiting.remove(v);

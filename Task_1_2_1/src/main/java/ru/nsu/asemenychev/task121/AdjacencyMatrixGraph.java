@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Граф в виде матрицы смежности {@code boolean[n][n]}.
- * Матрица перестраивается при каждом изменении структуры —
- * просто и надёжно, хотя и не оптимально.
+ * Граф в виде матрицы смежности.
+ * Матрица перестраивается при изменении набора вершин.
+ *
+ * @param <T> тип вершин
  */
-public class AdjacencyMatrixGraph extends AbstractGraph {
+public class AdjacencyMatrixGraph<T> extends AbstractGraph<T> {
 
-    private final List<String> order = new ArrayList<>();
-    private final List<String[]> edges = new ArrayList<>();
+    private final List<T> order = new ArrayList<>();
+    private final List<T[]> edges = new ArrayList<>();
     private boolean[][] matrix = new boolean[0][0];
 
     private void rebuild() {
@@ -19,7 +20,7 @@ public class AdjacencyMatrixGraph extends AbstractGraph {
         order.addAll(vertices);
         int n = order.size();
         matrix = new boolean[n][n];
-        for (String[] e : edges) {
+        for (T[] e : edges) {
             if (hasVertex(e[0]) && hasVertex(e[1])) {
                 matrix[order.indexOf(e[0])][order.indexOf(e[1])] = true;
             }
@@ -33,17 +34,19 @@ public class AdjacencyMatrixGraph extends AbstractGraph {
     }
 
     @Override
-    public void addEdge(String from, String to) {
+    @SuppressWarnings("unchecked")
+    public void addEdge(T from, T to) {
         checkVerticesExist(from, to);
         if (hasEdge(from, to)) {
             return;
         }
-        edges.add(new String[]{from, to});
+        edges.add((T[]) new Object[]{from, to});
         rebuild();
     }
 
     @Override
-    public boolean removeEdge(String from, String to) {
+    @SuppressWarnings("unchecked")
+    public boolean removeEdge(T from, T to) {
         boolean removed = edges.removeIf(e -> e[0].equals(from) && e[1].equals(to));
         if (removed) {
             rebuild();
@@ -52,7 +55,7 @@ public class AdjacencyMatrixGraph extends AbstractGraph {
     }
 
     @Override
-    public boolean hasEdge(String from, String to) {
+    public boolean hasEdge(T from, T to) {
         if (!hasVertex(from) || !hasVertex(to)) {
             return false;
         }
@@ -65,8 +68,8 @@ public class AdjacencyMatrixGraph extends AbstractGraph {
     }
 
     @Override
-    public List<String> getNeighbors(String vertex) {
-        List<String> result = new ArrayList<>();
+    public List<T> getNeighbors(T vertex) {
+        List<T> result = new ArrayList<>();
         if (!hasVertex(vertex)) {
             return result;
         }
@@ -80,7 +83,7 @@ public class AdjacencyMatrixGraph extends AbstractGraph {
     }
 
     @Override
-    protected void removeAllEdgesOf(String name) {
+    protected void removeAllEdgesOf(T name) {
         edges.removeIf(e -> e[0].equals(name) || e[1].equals(name));
     }
 }

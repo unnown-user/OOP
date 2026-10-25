@@ -4,16 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Граф в виде матрицы инцидентности {@code int[V][E]}.
- * Для ориентированного графа: {@code matrix[v][e] == +1}, если
- * вершина {@code v} — начало ребра {@code e}, {@code -1} — если конец,
- * {@code 0} — иначе.
+ * Граф в виде матрицы инцидентности.
+ *
+ * @param <T> тип вершин
  */
-public class IncidenceMatrixGraph extends AbstractGraph {
+public class IncidenceMatrixGraph<T> extends AbstractGraph<T> {
 
-    private final List<String[]> edges = new ArrayList<>();
+    private final List<T[]> edges = new ArrayList<>();
+    private final List<T> order = new ArrayList<>();
     private int[][] incidence = new int[0][0];
-    private final List<String> order = new ArrayList<>();
 
     private void rebuild() {
         order.clear();
@@ -22,8 +21,8 @@ public class IncidenceMatrixGraph extends AbstractGraph {
         int m = edges.size();
         incidence = new int[n][m];
         for (int e = 0; e < m; e++) {
-            String from = edges.get(e)[0];
-            String to = edges.get(e)[1];
+            T from = edges.get(e)[0];
+            T to = edges.get(e)[1];
             incidence[order.indexOf(from)][e] = 1;
             incidence[order.indexOf(to)][e] = -1;
         }
@@ -36,17 +35,18 @@ public class IncidenceMatrixGraph extends AbstractGraph {
     }
 
     @Override
-    public void addEdge(String from, String to) {
+    @SuppressWarnings("unchecked")
+    public void addEdge(T from, T to) {
         checkVerticesExist(from, to);
         if (hasEdge(from, to)) {
             return;
         }
-        edges.add(new String[]{from, to});
+        edges.add((T[]) new Object[]{from, to});
         rebuild();
     }
 
     @Override
-    public boolean removeEdge(String from, String to) {
+    public boolean removeEdge(T from, T to) {
         boolean removed = edges.removeIf(e -> e[0].equals(from) && e[1].equals(to));
         if (removed) {
             rebuild();
@@ -55,8 +55,8 @@ public class IncidenceMatrixGraph extends AbstractGraph {
     }
 
     @Override
-    public boolean hasEdge(String from, String to) {
-        for (String[] e : edges) {
+    public boolean hasEdge(T from, T to) {
+        for (T[] e : edges) {
             if (e[0].equals(from) && e[1].equals(to)) {
                 return true;
             }
@@ -70,12 +70,12 @@ public class IncidenceMatrixGraph extends AbstractGraph {
     }
 
     @Override
-    public List<String> getNeighbors(String vertex) {
-        List<String> result = new ArrayList<>();
+    public List<T> getNeighbors(T vertex) {
+        List<T> result = new ArrayList<>();
         if (!hasVertex(vertex)) {
             return result;
         }
-        for (String[] e : edges) {
+        for (T[] e : edges) {
             if (e[0].equals(vertex)) {
                 result.add(e[1]);
             }
@@ -84,7 +84,7 @@ public class IncidenceMatrixGraph extends AbstractGraph {
     }
 
     @Override
-    protected void removeAllEdgesOf(String name) {
+    protected void removeAllEdgesOf(T name) {
         edges.removeIf(e -> e[0].equals(name) || e[1].equals(name));
     }
 }

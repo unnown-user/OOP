@@ -9,38 +9,44 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * Общая часть всех реализаций графа: хранение вершин,
- * делегирование топологической сортировки, равенство и вывод.
- * Конкретные реализации переопределяют работу с рёбрами
- * и обновляют свою структуру через метод {@link #onStructureChanged()}.
+ * Базовая реализация графа.
+ * Хранит вершины и делегирует топологическую сортировку выбранной стратегии.
+ *
+ * @param <T> тип вершин
  */
-public abstract class AbstractGraph implements Graph {
+public abstract class AbstractGraph<T> implements Graph<T> {
 
     /** Вершины в порядке добавления. */
-    protected final Set<String> vertices = new LinkedHashSet<>();
+    protected final Set<T> vertices = new LinkedHashSet<>();
 
-    /** Стратегия топологической сортировки. По умолчанию — алгоритм Кана. */
-    private TopologicalSorter sorter = new KahnSorter();
+    /** Стратегия сортировки. По умолчанию — алгоритм Кана. */
+    private TopologicalSorter<T> sorter = new KahnSorter<>();
 
     /**
      * Устанавливает новую стратегию топологической сортировки.
      *
      * @param sorter новая стратегия
      */
-    public void setSorter(TopologicalSorter sorter) {
+    public void setSorter(TopologicalSorter<T> sorter) {
         this.sorter = sorter;
     }
 
     /**
-     * Хук, вызываемый при изменении структуры графа.
-     * Реализации могут переопределить его, чтобы перестроить свои матрицы/списки.
+     * Хук, вызываемый при изменении структуры графа (добавлении/удалении вершин).
+     *
+     * <p>Реализации графов могут переопределить его для перестроения
+     * своих внутренних матриц (например, матрицы смежности или инцидентности).
+     * Если конкретному представлению перестраивать нечего, переопределять не нужно.
      */
     protected void onStructureChanged() {
     }
 
     @Override
-    public void addVertex(String name) {
-        if (name == null || name.isBlank()) {
+    public void addVertex(T name) {
+        if (name == null) {
+            throw new IllegalArgumentException("Имя вершины не может быть null");
+        }
+        if (name instanceof String && ((String) name).isBlank()) {
             throw new IllegalArgumentException("Имя вершины не может быть пустым");
         }
         if (vertices.add(name)) {
@@ -49,7 +55,7 @@ public abstract class AbstractGraph implements Graph {
     }
 
     @Override
-    public boolean removeVertex(String name) {
+    public boolean removeVertex(T name) {
         if (!vertices.contains(name)) {
             return false;
         }
@@ -64,15 +70,15 @@ public abstract class AbstractGraph implements Graph {
      *
      * @param name имя удаляемой вершины
      */
-    protected abstract void removeAllEdgesOf(String name);
+    protected abstract void removeAllEdgesOf(T name);
 
     @Override
-    public boolean hasVertex(String name) {
+    public boolean hasVertex(T name) {
         return vertices.contains(name);
     }
 
     @Override
-    public Set<String> getVertices() {
+    public Set<T> getVertices() {
         return Collections.unmodifiableSet(vertices);
     }
 
@@ -81,13 +87,7 @@ public abstract class AbstractGraph implements Graph {
         return vertices.size();
     }
 
-    /**
-     * Проверяет, что обе вершины существуют. Бросает исключение, если нет.
-     *
-     * @param from начало
-     * @param to   конец
-     */
-    protected void checkVerticesExist(String from, String to) {
+    protected void checkVerticesExist(T from, T to) {
         if (!hasVertex(from)) {
             throw new IllegalArgumentException("Нет вершины: " + from);
         }
@@ -96,35 +96,35 @@ public abstract class AbstractGraph implements Graph {
         }
     }
 
-    /**
-     * Выполняет топологическую сортировку текущей выбранной стратегией.
-     *
-     * @return отсортированный список вершин
-     * @throws IllegalStateException если граф содержит цикл
-     */
     @Override
-    public List<String> topologicalSort() {
+    public List<T> topologicalSort() {
         return sorter.sort(this);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Graph)) {
+        if (!(o instanceof Graph<?>)) {
             return false;
         }
-        Graph g = (Graph) o;
-        if (!vertices.equals(g.getVertices())) {
+        Graph<?> g = (Graph<?>) o;
+
+        // Сначала проверяем множества вершин. Если типы разные (String vs Integer),
+        // этот метод вернет false, и мы сюда не пройдем.
+        if (!vertices.equals(g.getVertices()) || edgeCount() != g.edgeCount()) {
             return false;
         }
-        if (edgeCount() != g.edgeCount()) {
-            return false;
-        }
-        for (String v : vertices) {
-            Set<String> mine = new HashSet<>(getNeighbors(v));
-            Set<String> theirs = new HashSet<>(g.getNeighbors(v));
+
+        // Теперь точно уверены, что g имеет тот же тип T, что и наш граф.
+        // Приводим g к Graph<T>, чтобы компилятор разрешил вызвать getNeighbors(v).
+        Graph<T> typedG = (Graph<T>) g;
+
+        for (T v : vertices) {
+            Set<T> mine = new HashSet<>(getNeighbors(v));
+            Set<T> theirs = new HashSet<>(typedG.getNeighbors(v));
             if (!mine.equals(theirs)) {
                 return false;
             }
@@ -134,12 +134,11 @@ public abstract class AbstractGraph implements Graph {
 
     @Override
     public int hashCode() {
-        List<String> vs = new ArrayList<>(vertices);
-        Collections.sort(vs);
+        List<T> vs = new ArrayList<>(vertices);
         List<String> edges = new ArrayList<>();
-        for (String v : vs) {
-            for (String u : getNeighbors(v)) {
-                edges.add(v + "->" + u);
+        for (T v : vs) {
+            for (T u : getNeighbors(v)) {
+                edges.add(v.toString() + "->" + u.toString());
             }
         }
         Collections.sort(edges);
@@ -151,8 +150,8 @@ public abstract class AbstractGraph implements Graph {
         StringBuilder sb = new StringBuilder("Graph {\n");
         sb.append("  vertices: ").append(vertices).append('\n');
         sb.append("  edges:\n");
-        for (String v : vertices) {
-            for (String u : getNeighbors(v)) {
+        for (T v : vertices) {
+            for (T u : getNeighbors(v)) {
                 sb.append("    ").append(v).append(" -> ").append(u).append('\n');
             }
         }

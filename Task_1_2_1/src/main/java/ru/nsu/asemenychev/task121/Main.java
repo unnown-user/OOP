@@ -1,25 +1,25 @@
 package ru.nsu.asemenychev.task121;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 /**
- * Демонстрация работы с графами и топологической сортировкой.
+ * Демонстрация работы с графами.
  */
 public class Main {
 
     /**
-     * Запускает примеры: строит один и тот же граф тремя способами,
-     * сравнивает их, сортирует разными алгоритмами и обрабатывает циклы.
+     * Запускает примеры.
      *
-     * @param args аргументы командной строки (не используются)
+     * @param args аргументы командной строки
+     * @throws Exception при ошибках ввода-вывода
      */
-    public static void main(String[] args) {
-        // --- 1. Создание трех видов графов ---
-        Graph matrix = new AdjacencyMatrixGraph();
-        Graph list = new AdjacencyListGraph();
-        Graph incidence = new IncidenceMatrixGraph();
+    public static void main(String[] args) throws Exception {
+        Graph<String> list = new AdjacencyListGraph<>();
+        Graph<String> matrix = new AdjacencyMatrixGraph<>();
+        Graph<String> incidence = new IncidenceMatrixGraph<>();
 
-        Graph[] graphs = {matrix, list, incidence};
-
-        for (Graph g : graphs) {
+        for (Graph<String> g : new Graph[]{list, matrix, incidence}) {
             g.addVertex("A");
             g.addVertex("B");
             g.addVertex("C");
@@ -30,67 +30,41 @@ public class Main {
             g.addEdge("C", "D");
         }
 
-        // --- 2. Вывод в консоль ---
         System.out.println("--- Матрица смежности ---");
         System.out.println(matrix);
 
-        System.out.println("--- Список смежности ---");
-        System.out.println(list);
-
-        System.out.println("--- Матрица инцидентности ---");
-        System.out.println(incidence);
-
-        // --- 3. Сравнение (equals) ---
         System.out.println("--- Сравнение на равенство ---");
-        System.out.println("matrix.equals(list):      " + matrix.equals(list));
-        System.out.println("list.equals(incidence):   " + list.equals(incidence));
-        System.out.println("Хэш-коды одинаковы:       "
-                + (matrix.hashCode() == list.hashCode()
-                && list.hashCode() == incidence.hashCode()));
+        System.out.println("matrix.equals(list): " + matrix.equals(list));
 
-        // --- 4. Топологическая сортировка (по умолчанию Кан) ---
-        System.out.println("\n--- Топологическая сортировка (по умолчанию — Кан) ---");
-        System.out.println("matrix:    " + matrix.topologicalSort());
-        System.out.println("list:      " + list.topologicalSort());
-        System.out.println("incidence: " + incidence.topologicalSort());
+        System.out.println("--- Сортировка (по умолчанию — Кан) ---");
+        System.out.println("list: " + list.topologicalSort());
 
-        // --- 5. Смена алгоритма сортировки на DFS ---
-        System.out.println("\n--- Смена алгоритма на DFS (через Strategy) ---");
-        // Приводим тип к AbstractGraph, так как setSorter объявлен там
-        ((AbstractGraph) list).setSorter(new DfsSorter());
+        System.out.println("--- Смена алгоритма на DFS ---");
+        ((AbstractGraph<String>) list).setSorter(new DfsSorter<>());
         System.out.println("list (DFS): " + list.topologicalSort());
 
-        // --- 6. Обработка цикла ---
-        System.out.println("\n--- Демонстрация обнаружения цикла ---");
-        Graph cyclic = new AdjacencyListGraph();
+        System.out.println("--- Граф с циклом ---");
+        Graph<String> cyclic = new AdjacencyListGraph<>();
         cyclic.addVertex("X");
         cyclic.addVertex("Y");
-        cyclic.addVertex("Z");
         cyclic.addEdge("X", "Y");
-        cyclic.addEdge("Y", "Z");
-        cyclic.addEdge("Z", "X"); // Создаем цикл
-
+        cyclic.addEdge("Y", "X");
         try {
             cyclic.topologicalSort();
-            System.out.println("ОШИБКА: Цикл не был обнаружен!");
         } catch (IllegalStateException e) {
-            System.out.println("Ожидаемая ошибка: " + e.getMessage());
+            System.out.println("Поймано исключение: " + e.getMessage());
         }
 
-        // --- 7. Чтение из файла (пример) ---
-        System.out.println("\n--- Чтение из файла ---");
-        // Для примера создадим временный файл
-        try {
-            java.nio.file.Path tmp = java.nio.file.Files.createTempFile("test-graph", ".txt");
-            java.nio.file.Files.writeString(tmp, "3\nA\nB\nC\n2\nA B\nB C\n");
+        System.out.println("--- Чтение из файла ---");
+        Path tmp = Files.createTempFile("test-graph", ".txt");
+        Files.writeString(tmp, "3\nA\nB\nC\n2\nA B\nB C\n");
 
-            Graph fromFile = GraphIo.readFromFile(tmp.toString(), AdjacencyListGraph::new);
-            System.out.println("Успешно прочитан граф из файла:");
-            System.out.println(fromFile);
-
-            java.nio.file.Files.deleteIfExists(tmp);
-        } catch (Exception e) {
-            System.out.println("Ошибка при чтении из файла: " + e.getMessage());
-        }
+        Graph<String> fromFile = GraphIo.readFromFile(
+                tmp.toString(),
+                AdjacencyListGraph::new,
+                s -> s
+        );
+        System.out.println(fromFile);
+        Files.deleteIfExists(tmp);
     }
 }
