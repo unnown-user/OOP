@@ -67,21 +67,22 @@ loadScripts(document, 'script');</script>
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">ru.nsu.asemenychev.task121</a></div>
-<h1 title="Interface Graph" class="title">Interface Graph</h1>
+<h1 title="Interface Graph" class="title">Interface Graph&lt;T&gt;</h1>
 </div>
 <section class="class-description" id="class-description">
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>T</code> - тип данных, хранящихся в вершинах</dd>
+</dl>
 <dl class="notes">
 <dt>All Known Implementing Classes:</dt>
 <dd><code><a href="AbstractGraph.html" title="class in ru.nsu.asemenychev.task121">AbstractGraph</a></code>, <code><a href="AdjacencyListGraph.html" title="class in ru.nsu.asemenychev.task121">AdjacencyListGraph</a></code>, <code><a href="AdjacencyMatrixGraph.html" title="class in ru.nsu.asemenychev.task121">AdjacencyMatrixGraph</a></code>, <code><a href="IncidenceMatrixGraph.html" title="class in ru.nsu.asemenychev.task121">IncidenceMatrixGraph</a></code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">Graph</span></div>
-<div class="block">Интерфейс графа. Поддерживает работу с вершинами и рёбрами,
- запрос соседей и топологическую сортировку.
-
- <p>Все три классические реализации (<a href="AdjacencyMatrixGraph.html" title="class in ru.nsu.asemenychev.task121"><code>AdjacencyMatrixGraph</code></a>,
- <a href="AdjacencyListGraph.html" title="class in ru.nsu.asemenychev.task121"><code>AdjacencyListGraph</code></a>, <a href="IncidenceMatrixGraph.html" title="class in ru.nsu.asemenychev.task121"><code>IncidenceMatrixGraph</code></a>) реализуют
- этот интерфейс и полностью взаимозаменяемы.</div>
+<div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">Graph&lt;T&gt;</span></div>
+<div class="block">Интерфейс ориентированного графа с вершинами произвольного типа <code>T</code>.
+ Обеспечивает полиморфизм: клиентский код работает с интерфейсом,
+ не завися от конкретной реализации (матрица, список и т.д.).</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -97,63 +98,59 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#addEdge(java.lang.String,java.lang.String)" class="member-name-link">addEdge</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;from,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;to)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#addEdge(T,T)" class="member-name-link">addEdge</a><wbr>(<a href="Graph.html" title="type parameter in Graph">T</a>&nbsp;from,
+ <a href="Graph.html" title="type parameter in Graph">T</a>&nbsp;to)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Добавляет ориентированное ребро между двумя существующими вершинами.</div>
+<div class="block">Добавляет ориентированное ребро между существующими вершинами.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#addVertex(java.lang.String)" class="member-name-link">addVertex</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#addVertex(T)" class="member-name-link">addVertex</a><wbr>(<a href="Graph.html" title="type parameter in Graph">T</a>&nbsp;name)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Добавляет вершину, если её ещё нет.</div>
+<div class="block">Добавляет вершину в граф, если её ещё нет.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#edgeCount()" class="member-name-link">edgeCount</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Возвращает текущее количество ориентированных рёбер в графе.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getNeighbors(java.lang.String)" class="member-name-link">getNeighbors</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;vertex)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Graph.html" title="type parameter in Graph">T</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getNeighbors(T)" class="member-name-link">getNeighbors</a><wbr>(<a href="Graph.html" title="type parameter in Graph">T</a>&nbsp;vertex)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Возвращает список всех вершин, в которые ведут рёбра из указанной вершины.</div>
+<div class="block">Возвращает список соседей вершины (куда идут рёбра).</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="Graph.html" title="type parameter in Graph">T</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getVertices()" class="member-name-link">getVertices</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Возвращает множество всех вершин графа.</div>
+<div class="block">Возвращает множество всех вершин.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#hasEdge(java.lang.String,java.lang.String)" class="member-name-link">hasEdge</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;from,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;to)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#hasEdge(T,T)" class="member-name-link">hasEdge</a><wbr>(<a href="Graph.html" title="type parameter in Graph">T</a>&nbsp;from,
+ <a href="Graph.html" title="type parameter in Graph">T</a>&nbsp;to)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Проверяет, существует ли ориентированное ребро между двумя вершинами.</div>
+<div class="block">Проверяет наличие ребра.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#hasVertex(java.lang.String)" class="member-name-link">hasVertex</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#hasVertex(T)" class="member-name-link">hasVertex</a><wbr>(<a href="Graph.html" title="type parameter in Graph">T</a>&nbsp;name)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Проверяет, существует ли вершина в графе.</div>
+<div class="block">Проверяет наличие вершины в графе.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#removeEdge(java.lang.String,java.lang.String)" class="member-name-link">removeEdge</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;from,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;to)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#removeEdge(T,T)" class="member-name-link">removeEdge</a><wbr>(<a href="Graph.html" title="type parameter in Graph">T</a>&nbsp;from,
+ <a href="Graph.html" title="type parameter in Graph">T</a>&nbsp;to)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Удаляет ориентированное ребро.</div>
+<div class="block">Удаляет ребро.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#removeVertex(java.lang.String)" class="member-name-link">removeVertex</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#removeVertex(T)" class="member-name-link">removeVertex</a><wbr>(<a href="Graph.html" title="type parameter in Graph">T</a>&nbsp;name)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Удаляет вершину и все инцидентные рёбра.</div>
+<div class="block">Удаляет вершину и все инцидентные ей рёбра.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Graph.html" title="type parameter in Graph">T</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#topologicalSort()" class="member-name-link">topologicalSort</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Топологическая сортировка (алгоритм Кана).</div>
+<div class="block">Выполняет топологическую сортировку вершин.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#vertexCount()" class="member-name-link">vertexCount</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Возвращает текущее количество вершин в графе.</div>
-</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -169,52 +166,50 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="addVertex(java.lang.String)">
-<h3>addVertex</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">addVertex</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
-<div class="block">Добавляет вершину, если её ещё нет.</div>
+<section class="detail" id="addVertex(T)">
+<h3 id="addVertex(java.lang.Object)">addVertex</h3>
+<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">addVertex</span><wbr><span class="parameters">(<a href="Graph.html" title="type parameter in Graph">T</a>&nbsp;name)</span></div>
+<div class="block">Добавляет вершину в граф, если её ещё нет.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>name</code> - имя вершины</dd>
+<dd><code>name</code> - имя (идентификатор) вершины</dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="removeVertex(java.lang.String)">
-<h3>removeVertex</h3>
-<div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">removeVertex</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
-<div class="block">Удаляет вершину и все инцидентные рёбра.</div>
+<section class="detail" id="removeVertex(T)">
+<h3 id="removeVertex(java.lang.Object)">removeVertex</h3>
+<div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">removeVertex</span><wbr><span class="parameters">(<a href="Graph.html" title="type parameter in Graph">T</a>&nbsp;name)</span></div>
+<div class="block">Удаляет вершину и все инцидентные ей рёбра.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>name</code> - имя вершины</dd>
 <dt>Returns:</dt>
-<dd><code>true</code>, если вершина была</dd>
+<dd><code>true</code>, если вершина существовала и была удалена</dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="hasVertex(java.lang.String)">
-<h3>hasVertex</h3>
-<div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">hasVertex</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
-<div class="block">Проверяет, существует ли вершина в графе.</div>
+<section class="detail" id="hasVertex(T)">
+<h3 id="hasVertex(java.lang.Object)">hasVertex</h3>
+<div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">hasVertex</span><wbr><span class="parameters">(<a href="Graph.html" title="type parameter in Graph">T</a>&nbsp;name)</span></div>
+<div class="block">Проверяет наличие вершины в графе.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>name</code> - имя вершины</dd>
 <dt>Returns:</dt>
-<dd><code>true</code>, если вершина есть в графе</dd>
+<dd><code>true</code>, если вершина есть</dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getVertices()">
 <h3>getVertices</h3>
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">getVertices</span>()</div>
-<div class="block">Возвращает множество всех вершин графа.
- Множество доступно только для чтения: попытка изменить его
- вызовет <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/UnsupportedOperationException.html" title="class or interface in java.lang" class="external-link"><code>UnsupportedOperationException</code></a>.</div>
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="Graph.html" title="type parameter in Graph">T</a>&gt;</span>&nbsp;<span class="element-name">getVertices</span>()</div>
+<div class="block">Возвращает множество всех вершин.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>неизменяемое множество всех вершин</dd>
+<dd>неизменяемое множество вершин</dd>
 </dl>
 </section>
 </li>
@@ -222,52 +217,48 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="vertexCount()">
 <h3>vertexCount</h3>
 <div class="member-signature"><span class="return-type">int</span>&nbsp;<span class="element-name">vertexCount</span>()</div>
-<div class="block">Возвращает текущее количество вершин в графе.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>количество вершин</dd>
+<dd>текущее количество вершин в графе</dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="addEdge(java.lang.String,java.lang.String)">
-<h3>addEdge</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">addEdge</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;from,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;to)</span></div>
-<div class="block">Добавляет ориентированное ребро между двумя существующими вершинами.
- Если ребро уже существует, граф не меняется.
- Если хотя бы одна из вершин не существует, выбрасывается исключение.</div>
+<section class="detail" id="addEdge(T,T)">
+<h3 id="addEdge(java.lang.Object,java.lang.Object)">addEdge</h3>
+<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">addEdge</span><wbr><span class="parameters">(<a href="Graph.html" title="type parameter in Graph">T</a>&nbsp;from,
+ <a href="Graph.html" title="type parameter in Graph">T</a>&nbsp;to)</span></div>
+<div class="block">Добавляет ориентированное ребро между существующими вершинами.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>from</code> - начало ребра</dd>
 <dd><code>to</code> - конец ребра</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - если вершины <code>from</code> или <code>to</code> нет в графе</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - если одной из вершин не существует</dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="removeEdge(java.lang.String,java.lang.String)">
-<h3>removeEdge</h3>
-<div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">removeEdge</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;from,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;to)</span></div>
-<div class="block">Удаляет ориентированное ребро.</div>
+<section class="detail" id="removeEdge(T,T)">
+<h3 id="removeEdge(java.lang.Object,java.lang.Object)">removeEdge</h3>
+<div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">removeEdge</span><wbr><span class="parameters">(<a href="Graph.html" title="type parameter in Graph">T</a>&nbsp;from,
+ <a href="Graph.html" title="type parameter in Graph">T</a>&nbsp;to)</span></div>
+<div class="block">Удаляет ребро.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>from</code> - начало ребра</dd>
 <dd><code>to</code> - конец ребра</dd>
 <dt>Returns:</dt>
-<dd><code>true</code>, если ребро существовало и было удалено,
-         <code>false</code>, если такого ребра не было</dd>
+<dd><code>true</code>, если ребро существовало и было удалено</dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="hasEdge(java.lang.String,java.lang.String)">
-<h3>hasEdge</h3>
-<div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">hasEdge</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;from,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;to)</span></div>
-<div class="block">Проверяет, существует ли ориентированное ребро между двумя вершинами.</div>
+<section class="detail" id="hasEdge(T,T)">
+<h3 id="hasEdge(java.lang.Object,java.lang.Object)">hasEdge</h3>
+<div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">hasEdge</span><wbr><span class="parameters">(<a href="Graph.html" title="type parameter in Graph">T</a>&nbsp;from,
+ <a href="Graph.html" title="type parameter in Graph">T</a>&nbsp;to)</span></div>
+<div class="block">Проверяет наличие ребра.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>from</code> - начало ребра</dd>
@@ -281,32 +272,30 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="edgeCount()">
 <h3>edgeCount</h3>
 <div class="member-signature"><span class="return-type">int</span>&nbsp;<span class="element-name">edgeCount</span>()</div>
-<div class="block">Возвращает текущее количество ориентированных рёбер в графе.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>количество рёбер</dd>
+<dd>текущее количество рёбер в графе</dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="getNeighbors(java.lang.String)">
-<h3>getNeighbors</h3>
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">getNeighbors</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;vertex)</span></div>
-<div class="block">Возвращает список всех вершин, в которые ведут рёбра из указанной вершины.
- Если вершины не существует, возвращается пустой список.</div>
+<section class="detail" id="getNeighbors(T)">
+<h3 id="getNeighbors(java.lang.Object)">getNeighbors</h3>
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Graph.html" title="type parameter in Graph">T</a>&gt;</span>&nbsp;<span class="element-name">getNeighbors</span><wbr><span class="parameters">(<a href="Graph.html" title="type parameter in Graph">T</a>&nbsp;vertex)</span></div>
+<div class="block">Возвращает список соседей вершины (куда идут рёбра).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>vertex</code> - имя вершины</dd>
 <dt>Returns:</dt>
-<dd>список соседей (вершин, в которые есть ребро из <code>vertex</code>)</dd>
+<dd>список соседей, либо пустой список, если вершины нет</dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="topologicalSort()">
 <h3>topologicalSort</h3>
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">topologicalSort</span>()</div>
-<div class="block">Топологическая сортировка (алгоритм Кана).</div>
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Graph.html" title="type parameter in Graph">T</a>&gt;</span>&nbsp;<span class="element-name">topologicalSort</span>()</div>
+<div class="block">Выполняет топологическую сортировку вершин.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>упорядоченный список вершин</dd>

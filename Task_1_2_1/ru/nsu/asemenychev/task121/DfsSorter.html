@@ -67,20 +67,24 @@ loadScripts(document, 'script');</script>
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">ru.nsu.asemenychev.task121</a></div>
-<h1 title="Class DfsSorter" class="title">Class DfsSorter</h1>
+<h1 title="Class DfsSorter" class="title">Class DfsSorter&lt;T&gt;</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">ru.nsu.asemenychev.task121.DfsSorter</div>
+<div class="inheritance">ru.nsu.asemenychev.task121.DfsSorter&lt;T&gt;</div>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>T</code> - тип вершин</dd>
+</dl>
+<dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="TopologicalSorter.html" title="interface in ru.nsu.asemenychev.task121">TopologicalSorter</a></code></dd>
+<dd><code><a href="TopologicalSorter.html" title="interface in ru.nsu.asemenychev.task121">TopologicalSorter</a>&lt;T&gt;</code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">DfsSorter</span>
+<div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">DfsSorter&lt;T&gt;</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
-implements <a href="TopologicalSorter.html" title="interface in ru.nsu.asemenychev.task121">TopologicalSorter</a></span></div>
+implements <a href="TopologicalSorter.html" title="interface in ru.nsu.asemenychev.task121">TopologicalSorter</a>&lt;T&gt;</span></div>
 <div class="block">Топологическая сортировка на основе поиска в глубину (DFS).</div>
 </section>
 <section class="summary">
@@ -109,9 +113,12 @@ implements <a href="TopologicalSorter.html" title="interface in ru.nsu.asemenych
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#sort(ru.nsu.asemenychev.task121.Graph)" class="member-name-link">sort</a><wbr>(<a href="Graph.html" title="interface in ru.nsu.asemenychev.task121">Graph</a>&nbsp;graph)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="DfsSorter.html" title="type parameter in DfsSorter">T</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#sort(ru.nsu.asemenychev.task121.Graph)" class="member-name-link">sort</a><wbr>(<a href="Graph.html" title="interface in ru.nsu.asemenychev.task121">Graph</a>&lt;<a href="DfsSorter.html" title="type parameter in DfsSorter">T</a>&gt;&nbsp;graph)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Сортирует вершины так, что для каждого ребра <code>u -&gt; v</code>
+ вершина <code>u</code> идёт раньше <code>v</code>.</div>
+</div>
 </div>
 </div>
 </div>
@@ -146,14 +153,17 @@ implements <a href="TopologicalSorter.html" title="interface in ru.nsu.asemenych
 <li>
 <section class="detail" id="sort(ru.nsu.asemenychev.task121.Graph)">
 <h3>sort</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">sort</span><wbr><span class="parameters">(<a href="Graph.html" title="interface in ru.nsu.asemenychev.task121">Graph</a>&nbsp;graph)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="DfsSorter.html" title="type parameter in DfsSorter">T</a>&gt;</span>&nbsp;<span class="element-name">sort</span><wbr><span class="parameters">(<a href="Graph.html" title="interface in ru.nsu.asemenychev.task121">Graph</a>&lt;<a href="DfsSorter.html" title="type parameter in DfsSorter">T</a>&gt;&nbsp;graph)</span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="TopologicalSorter.html#sort(ru.nsu.asemenychev.task121.Graph)">TopologicalSorter</a></code></span></div>
+<div class="block">Сортирует вершины так, что для каждого ребра <code>u -&gt; v</code>
+ вершина <code>u</code> идёт раньше <code>v</code>.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="TopologicalSorter.html#sort(ru.nsu.asemenychev.task121.Graph)">sort</a></code>&nbsp;in interface&nbsp;<code><a href="TopologicalSorter.html" title="interface in ru.nsu.asemenychev.task121">TopologicalSorter</a></code></dd>
+<dd><code><a href="TopologicalSorter.html#sort(ru.nsu.asemenychev.task121.Graph)">sort</a></code>&nbsp;in interface&nbsp;<code><a href="TopologicalSorter.html" title="interface in ru.nsu.asemenychev.task121">TopologicalSorter</a>&lt;<a href="DfsSorter.html" title="type parameter in DfsSorter">T</a>&gt;</code></dd>
 <dt>Parameters:</dt>
 <dd><code>graph</code> - граф</dd>
 <dt>Returns:</dt>
-<dd>отсортированный список вершин</dd>
+<dd>упорядоченный список вершин</dd>
 </dl>
 </section>
 </li>

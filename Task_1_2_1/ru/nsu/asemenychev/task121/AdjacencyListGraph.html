@@ -67,22 +67,26 @@ loadScripts(document, 'script');</script>
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">ru.nsu.asemenychev.task121</a></div>
-<h1 title="Class AdjacencyListGraph" class="title">Class AdjacencyListGraph</h1>
+<h1 title="Class AdjacencyListGraph" class="title">Class AdjacencyListGraph&lt;T&gt;</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance"><a href="AbstractGraph.html" title="class in ru.nsu.asemenychev.task121">ru.nsu.asemenychev.task121.AbstractGraph</a>
-<div class="inheritance">ru.nsu.asemenychev.task121.AdjacencyListGraph</div>
+<div class="inheritance"><a href="AbstractGraph.html" title="class in ru.nsu.asemenychev.task121">ru.nsu.asemenychev.task121.AbstractGraph</a>&lt;T&gt;
+<div class="inheritance">ru.nsu.asemenychev.task121.AdjacencyListGraph&lt;T&gt;</div>
 </div>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>T</code> - тип вершин</dd>
+</dl>
+<dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="Graph.html" title="interface in ru.nsu.asemenychev.task121">Graph</a></code></dd>
+<dd><code><a href="Graph.html" title="interface in ru.nsu.asemenychev.task121">Graph</a>&lt;T&gt;</code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">AdjacencyListGraph</span>
-<span class="extends-implements">extends <a href="AbstractGraph.html" title="class in ru.nsu.asemenychev.task121">AbstractGraph</a></span></div>
-<div class="block">Граф в виде списка смежности: для каждой вершины — множество её соседей.</div>
+<div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">AdjacencyListGraph&lt;T&gt;</span>
+<span class="extends-implements">extends <a href="AbstractGraph.html" title="class in ru.nsu.asemenychev.task121">AbstractGraph</a>&lt;T&gt;</span></div>
+<div class="block">Граф в виде списка смежности.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -120,49 +124,47 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addEdge(java.lang.String,java.lang.String)" class="member-name-link">addEdge</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;from,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;to)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addEdge(T,T)" class="member-name-link">addEdge</a><wbr>(<a href="AdjacencyListGraph.html" title="type parameter in AdjacencyListGraph">T</a>&nbsp;from,
+ <a href="AdjacencyListGraph.html" title="type parameter in AdjacencyListGraph">T</a>&nbsp;to)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Добавляет ориентированное ребро между двумя существующими вершинами.</div>
+<div class="block">Добавляет ориентированное ребро между существующими вершинами.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#edgeCount()" class="member-name-link">edgeCount</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Возвращает текущее количество ориентированных рёбер в графе.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getNeighbors(java.lang.String)" class="member-name-link">getNeighbors</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;vertex)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AdjacencyListGraph.html" title="type parameter in AdjacencyListGraph">T</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getNeighbors(T)" class="member-name-link">getNeighbors</a><wbr>(<a href="AdjacencyListGraph.html" title="type parameter in AdjacencyListGraph">T</a>&nbsp;vertex)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Возвращает список всех вершин, в которые ведут рёбра из указанной вершины.</div>
+<div class="block">Возвращает список соседей вершины (куда идут рёбра).</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasEdge(java.lang.String,java.lang.String)" class="member-name-link">hasEdge</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;from,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;to)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasEdge(T,T)" class="member-name-link">hasEdge</a><wbr>(<a href="AdjacencyListGraph.html" title="type parameter in AdjacencyListGraph">T</a>&nbsp;from,
+ <a href="AdjacencyListGraph.html" title="type parameter in AdjacencyListGraph">T</a>&nbsp;to)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Проверяет, существует ли ориентированное ребро между двумя вершинами.</div>
+<div class="block">Проверяет наличие ребра.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onStructureChanged()" class="member-name-link">onStructureChanged</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Хук, вызываемый при изменении структуры графа.</div>
+<div class="block">Хук, вызываемый при изменении структуры графа (добавлении/удалении вершин).</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeAllEdgesOf(java.lang.String)" class="member-name-link">removeAllEdgesOf</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeAllEdgesOf(T)" class="member-name-link">removeAllEdgesOf</a><wbr>(<a href="AdjacencyListGraph.html" title="type parameter in AdjacencyListGraph">T</a>&nbsp;name)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Удаляет все рёбра, инцидентные указанной вершине.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeEdge(java.lang.String,java.lang.String)" class="member-name-link">removeEdge</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;from,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;to)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeEdge(T,T)" class="member-name-link">removeEdge</a><wbr>(<a href="AdjacencyListGraph.html" title="type parameter in AdjacencyListGraph">T</a>&nbsp;from,
+ <a href="AdjacencyListGraph.html" title="type parameter in AdjacencyListGraph">T</a>&nbsp;to)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Удаляет ориентированное ребро.</div>
+<div class="block">Удаляет ребро.</div>
 </div>
 </div>
 </div>
 </div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-ru.nsu.asemenychev.task121.AbstractGraph">Methods inherited from class&nbsp;ru.nsu.asemenychev.task121.<a href="AbstractGraph.html" title="class in ru.nsu.asemenychev.task121">AbstractGraph</a></h3>
-<code><a href="AbstractGraph.html#addVertex(java.lang.String)">addVertex</a>, <a href="AbstractGraph.html#checkVerticesExist(java.lang.String,java.lang.String)">checkVerticesExist</a>, <a href="AbstractGraph.html#equals(java.lang.Object)">equals</a>, <a href="AbstractGraph.html#getVertices()">getVertices</a>, <a href="AbstractGraph.html#hashCode()">hashCode</a>, <a href="AbstractGraph.html#hasVertex(java.lang.String)">hasVertex</a>, <a href="AbstractGraph.html#removeVertex(java.lang.String)">removeVertex</a>, <a href="AbstractGraph.html#setSorter(ru.nsu.asemenychev.task121.TopologicalSorter)">setSorter</a>, <a href="AbstractGraph.html#topologicalSort()">topologicalSort</a>, <a href="AbstractGraph.html#toString()">toString</a>, <a href="AbstractGraph.html#vertexCount()">vertexCount</a></code></div>
+<code><a href="AbstractGraph.html#addVertex(T)">addVertex</a>, <a href="AbstractGraph.html#checkVerticesExist(T,T)">checkVerticesExist</a>, <a href="AbstractGraph.html#equals(java.lang.Object)">equals</a>, <a href="AbstractGraph.html#getVertices()">getVertices</a>, <a href="AbstractGraph.html#hashCode()">hashCode</a>, <a href="AbstractGraph.html#hasVertex(T)">hasVertex</a>, <a href="AbstractGraph.html#removeVertex(T)">removeVertex</a>, <a href="AbstractGraph.html#setSorter(ru.nsu.asemenychev.task121.TopologicalSorter)">setSorter</a>, <a href="AbstractGraph.html#topologicalSort()">topologicalSort</a>, <a href="AbstractGraph.html#toString()">toString</a>, <a href="AbstractGraph.html#vertexCount()">vertexCount</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
 <code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
@@ -196,23 +198,23 @@ loadScripts(document, 'script');</script>
 <h3>onStructureChanged</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onStructureChanged</span>()</div>
 <div class="block"><span class="descfrm-type-label">Description copied from class:&nbsp;<code><a href="AbstractGraph.html#onStructureChanged()">AbstractGraph</a></code></span></div>
-<div class="block">Хук, вызываемый при изменении структуры графа.
- Реализации могут переопределить его, чтобы перестроить свои матрицы/списки.</div>
+<div class="block">Хук, вызываемый при изменении структуры графа (добавлении/удалении вершин).
+ <p>Реализации графов <b>могут</b> переопределить его для перестроения
+ своих внутренних матриц (например, матрицы смежности или инцидентности).
+ Если конкретному представлению перестраивать нечего, переопределять не нужно.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
-<dd><code><a href="AbstractGraph.html#onStructureChanged()">onStructureChanged</a></code>&nbsp;in class&nbsp;<code><a href="AbstractGraph.html" title="class in ru.nsu.asemenychev.task121">AbstractGraph</a></code></dd>
+<dd><code><a href="AbstractGraph.html#onStructureChanged()">onStructureChanged</a></code>&nbsp;in class&nbsp;<code><a href="AbstractGraph.html" title="class in ru.nsu.asemenychev.task121">AbstractGraph</a>&lt;<a href="AdjacencyListGraph.html" title="type parameter in AdjacencyListGraph">T</a>&gt;</code></dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="addEdge(java.lang.String,java.lang.String)">
-<h3>addEdge</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addEdge</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;from,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;to)</span></div>
-<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="Graph.html#addEdge(java.lang.String,java.lang.String)">Graph</a></code></span></div>
-<div class="block">Добавляет ориентированное ребро между двумя существующими вершинами.
- Если ребро уже существует, граф не меняется.
- Если хотя бы одна из вершин не существует, выбрасывается исключение.</div>
+<section class="detail" id="addEdge(T,T)">
+<h3 id="addEdge(java.lang.Object,java.lang.Object)">addEdge</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addEdge</span><wbr><span class="parameters">(<a href="AdjacencyListGraph.html" title="type parameter in AdjacencyListGraph">T</a>&nbsp;from,
+ <a href="AdjacencyListGraph.html" title="type parameter in AdjacencyListGraph">T</a>&nbsp;to)</span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="Graph.html#addEdge(T,T)">Graph</a></code></span></div>
+<div class="block">Добавляет ориентированное ребро между существующими вершинами.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>from</code> - начало ребра</dd>
@@ -221,29 +223,28 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="removeEdge(java.lang.String,java.lang.String)">
-<h3>removeEdge</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">removeEdge</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;from,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;to)</span></div>
-<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="Graph.html#removeEdge(java.lang.String,java.lang.String)">Graph</a></code></span></div>
-<div class="block">Удаляет ориентированное ребро.</div>
+<section class="detail" id="removeEdge(T,T)">
+<h3 id="removeEdge(java.lang.Object,java.lang.Object)">removeEdge</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">removeEdge</span><wbr><span class="parameters">(<a href="AdjacencyListGraph.html" title="type parameter in AdjacencyListGraph">T</a>&nbsp;from,
+ <a href="AdjacencyListGraph.html" title="type parameter in AdjacencyListGraph">T</a>&nbsp;to)</span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="Graph.html#removeEdge(T,T)">Graph</a></code></span></div>
+<div class="block">Удаляет ребро.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>from</code> - начало ребра</dd>
 <dd><code>to</code> - конец ребра</dd>
 <dt>Returns:</dt>
-<dd><code>true</code>, если ребро существовало и было удалено,
-         <code>false</code>, если такого ребра не было</dd>
+<dd><code>true</code>, если ребро существовало и было удалено</dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="hasEdge(java.lang.String,java.lang.String)">
-<h3>hasEdge</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasEdge</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;from,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;to)</span></div>
-<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="Graph.html#hasEdge(java.lang.String,java.lang.String)">Graph</a></code></span></div>
-<div class="block">Проверяет, существует ли ориентированное ребро между двумя вершинами.</div>
+<section class="detail" id="hasEdge(T,T)">
+<h3 id="hasEdge(java.lang.Object,java.lang.Object)">hasEdge</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasEdge</span><wbr><span class="parameters">(<a href="AdjacencyListGraph.html" title="type parameter in AdjacencyListGraph">T</a>&nbsp;from,
+ <a href="AdjacencyListGraph.html" title="type parameter in AdjacencyListGraph">T</a>&nbsp;to)</span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="Graph.html#hasEdge(T,T)">Graph</a></code></span></div>
+<div class="block">Проверяет наличие ребра.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>from</code> - начало ребра</dd>
@@ -257,38 +258,35 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="edgeCount()">
 <h3>edgeCount</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">edgeCount</span>()</div>
-<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="Graph.html#edgeCount()">Graph</a></code></span></div>
-<div class="block">Возвращает текущее количество ориентированных рёбер в графе.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>количество рёбер</dd>
+<dd>текущее количество рёбер в графе</dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="getNeighbors(java.lang.String)">
-<h3>getNeighbors</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">getNeighbors</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;vertex)</span></div>
-<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="Graph.html#getNeighbors(java.lang.String)">Graph</a></code></span></div>
-<div class="block">Возвращает список всех вершин, в которые ведут рёбра из указанной вершины.
- Если вершины не существует, возвращается пустой список.</div>
+<section class="detail" id="getNeighbors(T)">
+<h3 id="getNeighbors(java.lang.Object)">getNeighbors</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="AdjacencyListGraph.html" title="type parameter in AdjacencyListGraph">T</a>&gt;</span>&nbsp;<span class="element-name">getNeighbors</span><wbr><span class="parameters">(<a href="AdjacencyListGraph.html" title="type parameter in AdjacencyListGraph">T</a>&nbsp;vertex)</span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="Graph.html#getNeighbors(T)">Graph</a></code></span></div>
+<div class="block">Возвращает список соседей вершины (куда идут рёбра).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>vertex</code> - имя вершины</dd>
 <dt>Returns:</dt>
-<dd>список соседей (вершин, в которые есть ребро из <code>vertex</code>)</dd>
+<dd>список соседей, либо пустой список, если вершины нет</dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="removeAllEdgesOf(java.lang.String)">
-<h3>removeAllEdgesOf</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">removeAllEdgesOf</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
-<div class="block"><span class="descfrm-type-label">Description copied from class:&nbsp;<code><a href="AbstractGraph.html#removeAllEdgesOf(java.lang.String)">AbstractGraph</a></code></span></div>
+<section class="detail" id="removeAllEdgesOf(T)">
+<h3 id="removeAllEdgesOf(java.lang.Object)">removeAllEdgesOf</h3>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">removeAllEdgesOf</span><wbr><span class="parameters">(<a href="AdjacencyListGraph.html" title="type parameter in AdjacencyListGraph">T</a>&nbsp;name)</span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from class:&nbsp;<code><a href="AbstractGraph.html#removeAllEdgesOf(T)">AbstractGraph</a></code></span></div>
 <div class="block">Удаляет все рёбра, инцидентные указанной вершине.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="AbstractGraph.html#removeAllEdgesOf(java.lang.String)">removeAllEdgesOf</a></code>&nbsp;in class&nbsp;<code><a href="AbstractGraph.html" title="class in ru.nsu.asemenychev.task121">AbstractGraph</a></code></dd>
+<dd><code><a href="AbstractGraph.html#removeAllEdgesOf(T)">removeAllEdgesOf</a></code>&nbsp;in class&nbsp;<code><a href="AbstractGraph.html" title="class in ru.nsu.asemenychev.task121">AbstractGraph</a>&lt;<a href="AdjacencyListGraph.html" title="type parameter in AdjacencyListGraph">T</a>&gt;</code></dd>
 <dt>Parameters:</dt>
 <dd><code>name</code> - имя удаляемой вершины</dd>
 </dl>

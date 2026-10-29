@@ -76,8 +76,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">GraphIo</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Утилитарный класс для чтения графа из файла фиксированного формата.
- Создание экземпляров запрещено.</div>
+<div class="block">Утилитарный класс для чтения графа из файла фиксированного формата.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -92,9 +91,10 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="Graph.html" title="interface in ru.nsu.asemenychev.task121">Graph</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#readFromFile(java.lang.String,java.util.function.Supplier)" class="member-name-link">readFromFile</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Supplier.html" title="class or interface in java.util.function" class="external-link">Supplier</a>&lt;<a href="Graph.html" title="interface in ru.nsu.asemenychev.task121">Graph</a>&gt;&nbsp;graphFactory)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T&gt;&nbsp;<a href="Graph.html" title="interface in ru.nsu.asemenychev.task121">Graph</a>&lt;T&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#readFromFile(java.lang.String,java.util.function.Supplier,java.util.function.Function)" class="member-name-link">readFromFile</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Supplier.html" title="class or interface in java.util.function" class="external-link">Supplier</a>&lt;<a href="Graph.html" title="interface in ru.nsu.asemenychev.task121">Graph</a>&lt;T&gt;&gt;&nbsp;graphFactory,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr>T&gt;&nbsp;vertexParser)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Читает граф из файла.</div>
 </div>
@@ -116,16 +116,20 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="readFromFile(java.lang.String,java.util.function.Supplier)">
+<section class="detail" id="readFromFile(java.lang.String,java.util.function.Supplier,java.util.function.Function)">
 <h3>readFromFile</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="Graph.html" title="interface in ru.nsu.asemenychev.task121">Graph</a></span>&nbsp;<span class="element-name">readFromFile</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Supplier.html" title="class or interface in java.util.function" class="external-link">Supplier</a>&lt;<a href="Graph.html" title="interface in ru.nsu.asemenychev.task121">Graph</a>&gt;&nbsp;graphFactory)</span>
-                          throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="Graph.html" title="interface in ru.nsu.asemenychev.task121">Graph</a>&lt;T&gt;</span>&nbsp;<span class="element-name">readFromFile</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Supplier.html" title="class or interface in java.util.function" class="external-link">Supplier</a>&lt;<a href="Graph.html" title="interface in ru.nsu.asemenychev.task121">Graph</a>&lt;T&gt;&gt;&nbsp;graphFactory,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr>T&gt;&nbsp;vertexParser)</span>
+                                 throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
 <div class="block">Читает граф из файла.</div>
 <dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>T</code> - тип вершин</dd>
 <dt>Parameters:</dt>
 <dd><code>path</code> - путь к файлу</dd>
-<dd><code>graphFactory</code> - функция-конструктор нужной реализации графа</dd>
+<dd><code>graphFactory</code> - функция, создающая пустой граф нужного типа</dd>
+<dd><code>vertexParser</code> - функция преобразования строки из файла в тип вершины T</dd>
 <dt>Returns:</dt>
 <dd>построенный граф</dd>
 <dt>Throws:</dt>

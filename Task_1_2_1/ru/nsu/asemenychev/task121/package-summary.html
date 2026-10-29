@@ -71,50 +71,45 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Class</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="AbstractGraph.html" title="class in ru.nsu.asemenychev.task121">AbstractGraph</a></div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="AbstractGraph.html" title="class in ru.nsu.asemenychev.task121">AbstractGraph</a>&lt;T&gt;</div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
-<div class="block">Общая часть всех реализаций графа: хранение вершин,
- делегирование топологической сортировки, равенство и вывод.</div>
+<div class="block">Базовая реализация графа.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="AdjacencyListGraph.html" title="class in ru.nsu.asemenychev.task121">AdjacencyListGraph</a></div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="AdjacencyListGraph.html" title="class in ru.nsu.asemenychev.task121">AdjacencyListGraph</a>&lt;T&gt;</div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
-<div class="block">Граф в виде списка смежности: для каждой вершины — множество её соседей.</div>
+<div class="block">Граф в виде списка смежности.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="AdjacencyMatrixGraph.html" title="class in ru.nsu.asemenychev.task121">AdjacencyMatrixGraph</a></div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="AdjacencyMatrixGraph.html" title="class in ru.nsu.asemenychev.task121">AdjacencyMatrixGraph</a>&lt;T&gt;</div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
-<div class="block">Граф в виде матрицы смежности <code>boolean[n][n]</code>.</div>
+<div class="block">Граф в виде матрицы смежности.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="DfsSorter.html" title="class in ru.nsu.asemenychev.task121">DfsSorter</a></div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="DfsSorter.html" title="class in ru.nsu.asemenychev.task121">DfsSorter</a>&lt;T&gt;</div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">Топологическая сортировка на основе поиска в глубину (DFS).</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab1"><a href="Graph.html" title="interface in ru.nsu.asemenychev.task121">Graph</a></div>
+<div class="col-first even-row-color class-summary class-summary-tab1"><a href="Graph.html" title="interface in ru.nsu.asemenychev.task121">Graph</a>&lt;T&gt;</div>
 <div class="col-last even-row-color class-summary class-summary-tab1">
-<div class="block">Интерфейс графа.</div>
+<div class="block">Интерфейс ориентированного графа с вершинами произвольного типа <code>T</code>.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="GraphFactory.html" title="class in ru.nsu.asemenychev.task121">GraphFactory</a></div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="GraphIo.html" title="class in ru.nsu.asemenychev.task121">GraphIo</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
-<div class="block">Фабрика реализаций графа.</div>
-</div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="GraphIo.html" title="class in ru.nsu.asemenychev.task121">GraphIo</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">Утилитарный класс для чтения графа из файла фиксированного формата.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="IncidenceMatrixGraph.html" title="class in ru.nsu.asemenychev.task121">IncidenceMatrixGraph</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab2">
-<div class="block">Граф в виде матрицы инцидентности <code>int[V][E]</code>.</div>
-</div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="KahnSorter.html" title="class in ru.nsu.asemenychev.task121">KahnSorter</a></div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="IncidenceMatrixGraph.html" title="class in ru.nsu.asemenychev.task121">IncidenceMatrixGraph</a>&lt;T&gt;</div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="block">Граф в виде матрицы инцидентности.</div>
+</div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="KahnSorter.html" title="class in ru.nsu.asemenychev.task121">KahnSorter</a>&lt;T&gt;</div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">Топологическая сортировка алгоритмом Кана.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Main.html" title="class in ru.nsu.asemenychev.task121">Main</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab2">
-<div class="block">Демонстрация работы с графами и топологической сортировкой.</div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="Main.html" title="class in ru.nsu.asemenychev.task121">Main</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="block">Демонстрация работы с графами.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab1"><a href="TopologicalSorter.html" title="interface in ru.nsu.asemenychev.task121">TopologicalSorter</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab1">
-<div class="block">Стратегия топологической сортировки графа.</div>
+<div class="col-first odd-row-color class-summary class-summary-tab1"><a href="TopologicalSorter.html" title="interface in ru.nsu.asemenychev.task121">TopologicalSorter</a>&lt;T&gt;</div>
+<div class="col-last odd-row-color class-summary class-summary-tab1">
+<div class="block">Стратегия топологической сортировки.</div>
 </div>
 </div>
 </div>
