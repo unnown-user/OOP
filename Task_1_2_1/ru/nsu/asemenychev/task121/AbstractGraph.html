@@ -160,10 +160,10 @@ implements <a href="Graph.html" title="interface in ru.nsu.asemenychev.task121">
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Проверяет наличие вершины в графе.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onStructureChanged()" class="member-name-link">onStructureChanged</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Хук, вызываемый при изменении структуры графа (добавлении/удалении вершин).</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#onStructureChanged()" class="member-name-link">onStructureChanged</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Вызывается при изменении структуры графа (добавлении/удалении вершин).</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#removeAllEdgesOf(T)" class="member-name-link">removeAllEdgesOf</a><wbr>(<a href="AbstractGraph.html" title="type parameter in AbstractGraph">T</a>&nbsp;name)</code></div>
@@ -256,12 +256,8 @@ implements <a href="Graph.html" title="interface in ru.nsu.asemenychev.task121">
 <li>
 <section class="detail" id="onStructureChanged()">
 <h3>onStructureChanged</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onStructureChanged</span>()</div>
-<div class="block">Хук, вызываемый при изменении структуры графа (добавлении/удалении вершин).
-
- <p>Реализации графов могут переопределить его для перестроения
- своих внутренних матриц (например, матрицы смежности или инцидентности).
- Если конкретному представлению перестраивать нечего, переопределять не нужно.</div>
+<div class="member-signature"><span class="modifiers">protected abstract</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onStructureChanged</span>()</div>
+<div class="block">Вызывается при изменении структуры графа (добавлении/удалении вершин).</div>
 </section>
 </li>
 <li>
