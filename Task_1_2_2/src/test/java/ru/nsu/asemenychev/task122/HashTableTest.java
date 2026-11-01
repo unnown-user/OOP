@@ -72,6 +72,9 @@ class HashTableTest {
             map.put(i, i * 10);
         }
         assertEquals(100, map.size());
-        assertEquals(1000, map.get(100 - 1));
+        assertEquals(990, map.get(100 - 1));
+
+        assertEquals(0, map.get(0));
+        assertEquals(500, map.get(50));
     }
 }

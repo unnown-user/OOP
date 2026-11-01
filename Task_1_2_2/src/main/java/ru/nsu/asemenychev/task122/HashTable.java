@@ -188,4 +188,61 @@ public class HashTable<K, V> implements CustomMap<K, V> {
     public Iterator<HashNode<K, V>> iterator() {
         return new HashTableIterator<>(this);
     }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof HashTable<?, ?>)) {
+            return false;
+        }
+
+        HashTable<K, V> other = (HashTable<K, V>) o;
+
+        if (this.size != other.size) {
+            return false;
+        }
+
+        for (HashNode<K, V> head : table) {
+            HashNode<K, V> node = head;
+            while (node != null) {
+                Object otherValue = other.get(node.key);
+
+                if (!Objects.equals(node.value, otherValue)) {
+                    return false;
+                }
+                node = node.next;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int h = 0;
+        for (HashNode<K, V> head : table) {
+            HashNode<K, V> node = head;
+            while (node != null) {
+                h += Objects.hashCode(node.key) ^ Objects.hashCode(node.value);
+                node = node.next;
+            }
+        }
+        return h;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("{");
+        Iterator<HashNode<K, V>> it = iterator();
+        while (it.hasNext()) {
+            sb.append(it.next());
+            if (it.hasNext()) {
+                sb.append(", ");
+            }
+        }
+        sb.append("}");
+        return sb.toString();
+    }
 }
