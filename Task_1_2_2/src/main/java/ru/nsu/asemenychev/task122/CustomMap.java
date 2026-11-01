@@ -51,6 +51,8 @@ public interface CustomMap<K, V> extends Iterable<HashNode<K, V>> {
     int size();
 
     /**
+     * Возвращает итератор для обхода элементов таблицы.
+     *
      * @return итератор по узлам таблицы
      */
     @Override

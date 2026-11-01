@@ -28,6 +28,8 @@ public class HashNode<K, V> {
     }
 
     /**
+     * Возвращает ключ узла.
+     *
      * @return ключ узла
      */
     public K getKey() {
@@ -35,12 +37,13 @@ public class HashNode<K, V> {
     }
 
     /**
+     * Возвращает значение узла.
+     *
      * @return значение узла
      */
     public V getValue() {
         return value;
     }
-
     @Override
     public String toString() {
         return key + "=" + value;
