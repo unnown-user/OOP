@@ -29,7 +29,6 @@ public class HashTableIterator<K, V> implements Iterator<HashNode<K, V>> {
 
     /**
      * Вспомогательный метод: ищет следующий узел.
-     * Если текущая очередь закончилась, он идет к следующему дому.
      */
     private void findNextNode() {
         while (currentBucket < table.capacity) {
@@ -43,7 +42,7 @@ public class HashTableIterator<K, V> implements Iterator<HashNode<K, V>> {
     }
 
     /**
-     * Наш предохранитель. Если таблицу изменили — падаем с ошибкой.
+     * Предохранитель. Если таблицу изменили — упадет с ошибкой.
      */
     private void checkForComodification() {
         if (table.modCount != expectedModCount) {

@@ -162,7 +162,9 @@ public class HashTable<K, V> implements CustomMap<K, V> {
         HashNode<K, V> node = table[index];
         HashNode<K, V> prev = null;
         while (node != null) {
-            if (node.hash == hash && Objects.equals(key, node.key) && Objects.equals(value, node.value)) {
+            if (node.hash == hash
+                    && Objects.equals(key, node.key)
+                    && Objects.equals(value, node.value)) {
                 if (prev == null) {
                     table[index] = node.next;
                 } else {
