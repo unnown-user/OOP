@@ -1,8 +1,8 @@
 package ru.nsu.asemenychev.task122;
 
-import java.util.Objects;
-import java.util.NoSuchElementException;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 
 /**
  * Хеш-таблица с разрешением коллизий методом цепочек.
@@ -65,7 +65,7 @@ public class HashTable<K, V> implements CustomMap<K, V> {
         }
 
         // Если ключа нет, добавляем новый узел в начало цепочки
-        HashNode<K, V>newFirstNode = new HashNode<K, V>(key, value, hash, table[index]);
+        HashNode<K, V> newFirstNode = new HashNode<K, V>(key, value, hash, table[index]);
         table[index] = newFirstNode;
 
         size++;
@@ -133,7 +133,9 @@ public class HashTable<K, V> implements CustomMap<K, V> {
 
     @Override
     public boolean containsKey(K key) {
-        if (key == null) return false;
+        if (key == null) {
+            return false;
+        }
         int hash = hash(key);
         int index = HashUtility.getBucketIndex(hash, capacity);
 
@@ -163,8 +165,7 @@ public class HashTable<K, V> implements CustomMap<K, V> {
             if (node.hash == hash && Objects.equals(key, node.key) && Objects.equals(value, node.value)) {
                 if (prev == null) {
                     table[index] = node.next;
-                }
-                else {
+                } else {
                     prev.next = node.next;
                 }
 

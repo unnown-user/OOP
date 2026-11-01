@@ -37,12 +37,16 @@ public interface CustomMap<K, V> extends Iterable<HashNode<K, V>> {
     V get(K key);
 
     /**
-     * Проверяет наличие ключа.
+     * Проверяет наличие ключа в таблице.
+     *
+     * @return true, если ключ есть
      */
     boolean containsKey(K key);
 
     /**
-     * @return количество элементов
+     * Возвращает количество элементов в таблице.
+     *
+     * @return размер таблицы
      */
     int size();
 

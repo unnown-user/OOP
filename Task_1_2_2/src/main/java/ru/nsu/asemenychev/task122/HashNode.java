@@ -12,6 +12,14 @@ public class HashNode<K, V> {
     final int hash;
     HashNode<K, V> next;
 
+    /**
+     * Конструктор: создает новый узел.
+     *
+     * @param key   ключ
+     * @param value значение
+     * @param hash  хеш-код
+     * @param next  следующий узел
+     */
     public HashNode(K key, V value, int hash, HashNode<K, V> next) {
         this.key = key;
         this.value = value;
@@ -19,9 +27,16 @@ public class HashNode<K, V> {
         this.next = next;
     }
 
+    /**
+     * @return ключ узла
+     */
     public K getKey() {
         return key;
     }
+
+    /**
+     * @return значение узла
+     */
     public V getValue() {
         return value;
     }
