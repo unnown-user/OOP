@@ -40,6 +40,7 @@ class MainTest {
         assertTrue(output.contains("1.0"), "Должен быть выведен результат get(\"one\")");
         assertTrue(output.contains("Таблица: {"), "Должен быть выведен toString таблицы");
         assertTrue(output.contains("Итерация:"), "Должен быть вывод работы итератора");
-        assertTrue(output.contains("Поймано исключение:"), "Должно быть поймано ConcurrentModificationException");
+        assertTrue(output.contains("Поймано исключение:"),
+                "Должно быть поймано ConcurrentModificationException");
     }
 }
