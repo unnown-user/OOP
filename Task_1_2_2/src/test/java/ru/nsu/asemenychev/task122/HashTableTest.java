@@ -10,6 +10,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ConcurrentModificationException;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Тесты для узла HashTable.
+ */
 class HashTableTest {
 
     @Test
@@ -76,5 +79,55 @@ class HashTableTest {
 
         assertEquals(0, map.get(0));
         assertEquals(500, map.get(50));
+    }
+
+    @Test
+    void testEqualsWithDifferentGenericTypes() {
+        HashTable<String, Integer> map1 = new HashTable<>();
+        map1.put("one", 1);
+
+        HashTable<Integer, String> map2 = new HashTable<>();
+        map2.put(1, "one");
+
+        assertFalse(map1.equals(map2));
+    }
+
+    @Test
+    void testEqualsWithNullAndDifferentObjects() {
+        HashTable<String, Integer> map = new HashTable<>();
+        map.put("A", 1);
+
+        assertNotEquals(null, map);
+        assertNotEquals("Just a string", map);
+    }
+
+    @Test
+    void testCollisionHandling() {
+        HashTable<Integer, String> map = new HashTable<>();
+
+        map.put(16, "Sixteen");
+        map.put(32, "ThirtyTwo");
+        map.put(48, "FortyEight");
+
+        assertEquals("Sixteen", map.get(16));
+        assertEquals("ThirtyTwo", map.get(32));
+        assertEquals("FortyEight", map.get(48));
+        assertEquals(3, map.size());
+
+        assertTrue(map.remove(32, "ThirtyTwo"));
+        assertNull(map.get(32));
+        assertEquals(2, map.size());
+    }
+
+    @Test
+    void testRemoveWrongValueOrKey() {
+        HashTable<String, Integer> map = new HashTable<>();
+        map.put("A", 1);
+
+        assertFalse(map.remove("A", 2));
+        assertFalse(map.remove("B", 1));
+
+        assertEquals(1, map.size());
+        assertEquals(1, map.get("A"));
     }
 }
