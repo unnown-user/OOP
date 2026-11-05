@@ -125,10 +125,23 @@ public class HashTable<K, V> implements CustomMap<K, V> {
 
     @Override
     public void update(K key, V value) {
-        if (!containsKey(key)) {
-            throw new NoSuchElementException("Ключ не найден: " + key);
+        if (key == null) {
+            throw new IllegalArgumentException("Ключ не может быть null");
         }
-        put(key, value);
+
+        int hash = hash(key);
+        int index = HashUtility.getBucketIndex(hash, capacity);
+
+        HashNode<K, V> node = table[index];
+        while (node != null) {
+            if (node.hash == hash && Objects.equals(node.key, key)) {
+                node.value = value;
+                return;
+            }
+            node = node.next;
+        }
+
+        throw new NoSuchElementException("Ключ не найден: " + key);
     }
 
     @Override
