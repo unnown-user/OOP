@@ -11,7 +11,7 @@ import java.util.ConcurrentModificationException;
 import org.junit.jupiter.api.Test;
 
 /**
- * Тесты для узла HashTable.
+ * Тесты для узла {@link HashTable}.
  */
 class HashTableTest {
 

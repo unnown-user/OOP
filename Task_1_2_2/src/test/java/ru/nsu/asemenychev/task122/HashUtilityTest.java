@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 /**
- * Тесты для утилитарного класса HashUtility.
+ * Тесты для утилитарного класса {@link HashUtility}.
  */
 class HashUtilityTest {
 

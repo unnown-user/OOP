@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 /**
- * Тесты для узла HashNode.
+ * Тесты для узла {@link HashNode}.
  */
 class HashNodeTest {
 
