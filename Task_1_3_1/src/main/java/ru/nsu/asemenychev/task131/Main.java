@@ -1,17 +1,35 @@
 package ru.nsu.asemenychev.task131;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    static void main() {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        IO.println(String.format("Hello and welcome!"));
+import java.io.IOException;
+import java.util.List;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            IO.println("i = " + i);
+/**
+ * Точка входа в программу поиска подстроки в файле.
+ */
+public class Main {
+
+    /**
+     * Запускает поиск подстроки.
+     * Ожидает два аргумента командной строки: путь к файлу и искомую подстроку.
+     *
+     * @param args аргументы командной строки
+     */
+    public static void main(String[] args) {
+        if (args.length < 2) {
+            System.out.println("Использование: java -jar Task_1_3_1.jar <файл> <подстрока>");
+            return;
+        }
+        String filePath = args[0];
+        String substring = args[1];
+
+        FileSubstringSearcher searcher = new FileSubstringSearcher();
+        try {
+            List<Long> indices = searcher.find(filePath, substring);
+            System.out.println(indices);
+        } catch (IOException e) {
+            System.err.println("Ошибка при чтении файла: " + e.getMessage());
+        } catch (IllegalArgumentException e) {
+            System.err.println("Ошибка: " + e.getMessage());
         }
     }
 }

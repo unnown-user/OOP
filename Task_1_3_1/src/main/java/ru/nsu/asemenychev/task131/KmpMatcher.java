@@ -2,8 +2,8 @@ package ru.nsu.asemenychev.task131;
 
 /**
  * Алгоритм Кнута-Морриса-Пратта (KMP) для поиска подстроки в потоке символов.
- * Позволяет находить вхождения за O(N) времени и O(M) дополнительной памяти,
- * (N - длина текста, M - длина искомой подстроки).
+ * Позволяет находить вхождения за O(N) времени и O(M) дополнительной памяти
+ * (N - длина текста; M - длина искомой подстроки).
  */
 public class KmpMatcher {
 
@@ -26,7 +26,7 @@ public class KmpMatcher {
         }
 
         this.pattern = patternStr.toCharArray();
-        // this.prefix = computePrefixFunction(this.pattern);
+        this.prefix = computePrefixFunction(this.pattern);
         this.matchedLength = 0;
     }
 
