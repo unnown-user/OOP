@@ -16,7 +16,7 @@ public class Main {
      */
     public static void main(String[] args) {
         if (args.length < 2) {
-            System.out.println("Использование: java -jar Task_1_3_1.jar <файл> <подстрока>");
+            System.out.println("Ожидаются аргументы: <файл> <подстрока>");
             return;
         }
         String filePath = args[0];
