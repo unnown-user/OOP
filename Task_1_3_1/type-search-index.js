@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"ru.nsu.asemenychev.task131","l":"FileSubstringSearcher"},{"p":"ru.nsu.asemenychev.task131","l":"KmpMatcher"},{"p":"ru.nsu.asemenychev.task131","l":"Main"}];updateSearchResults();
