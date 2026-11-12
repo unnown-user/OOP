@@ -84,4 +84,15 @@ class FileSubstringSearcherTest {
         assertEquals(0L, result.get(0));
         assertEquals(100_000L, result.get(1));
     }
+
+    @Test
+    void testNotASCII() throws IOException {
+        String text = "你好世界你好";
+        Path file = tempDir.resolve("utf8.txt");
+        Files.writeString(file, text, StandardCharsets.UTF_8);
+
+        FileSubstringSearcher searcher = new FileSubstringSearcher();
+        List<Long> result = searcher.find(file.toString(), "你好");
+        assertEquals(Arrays.asList(0L, 4L), result);
+    }
 }
