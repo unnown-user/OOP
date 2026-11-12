@@ -86,7 +86,7 @@ class FileSubstringSearcherTest {
     }
 
     @Test
-    void testNotASCII() throws IOException {
+    void testNotAscii() throws IOException {
         String text = "你好世界你好";
         Path file = tempDir.resolve("utf8.txt");
         Files.writeString(file, text, StandardCharsets.UTF_8);
