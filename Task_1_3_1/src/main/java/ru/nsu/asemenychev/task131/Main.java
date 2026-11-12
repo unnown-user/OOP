@@ -28,7 +28,8 @@ public class Main {
         Runtime runtime = Runtime.getRuntime();
         // Сборщик мусора
         System.gc();
-        long memoryBefore = (runtime.totalMemory() - runtime.freeMemory()) / BYTES_IN_MEGABYTE;
+        long memoryBefore = (runtime.totalMemory() - runtime.freeMemory())
+                / BYTES_IN_MEGABYTE;
 
         System.out.println("--- Старт поиска ---");
         System.out.println("Использовано ОЗУ до начала: " + memoryBefore + " МБ");
@@ -44,7 +45,8 @@ public class Main {
 
             // Замер памяти ПОСЛЕ
             System.gc();
-            final long memoryAfter = (runtime.totalMemory() - runtime.freeMemory()) / BYTES_IN_MEGABYTE;
+            final long memoryAfter = (runtime.totalMemory() - runtime.freeMemory())
+                    / BYTES_IN_MEGABYTE;
 
             System.out.println("Найдено вхождений: " + indices.size());
             if (!indices.isEmpty()) {
