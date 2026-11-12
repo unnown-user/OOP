@@ -27,7 +27,7 @@ class MainTest {
     @Test
     void testMainProcessesLargeFileWithinLimitedMemory() throws Exception {
         Path hugeFile = tempDir.resolve("huge_test.txt");
-        long targetIndex = 75_000_000L;
+        final long targetIndex = 75_000_000L;
         String target = "СЕКРЕТ";
 
         try (BufferedWriter writer = Files.newBufferedWriter(hugeFile, StandardCharsets.UTF_8)) {
@@ -60,11 +60,14 @@ class MainTest {
         boolean finished = process.waitFor(60, TimeUnit.SECONDS);
 
         assertTrue(finished, "Процесс не завершился за 60 секунд");
-        assertEquals(0, process.exitValue(), "Процесс завершился с ошибкой (возможно, OutOfMemoryError)");
+        assertEquals(0, process.exitValue(),
+                "Процесс завершился с ошибкой (возможно, OutOfMemoryError)");
 
         String output = new String(process.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
 
-        assertTrue(output.contains("Найдено вхождений: 1"), "Не найдено вхождений в выводе: " + output);
-        assertTrue(output.contains(String.valueOf(targetIndex)), "Неверный индекс в выводе: " + output);
+        assertTrue(output.contains("Найдено вхождений: 1"),
+                "Не найдено вхождений в выводе: " + output);
+        assertTrue(output.contains(String.valueOf(targetIndex)),
+                "Неверный индекс в выводе: " + output);
     }
 }

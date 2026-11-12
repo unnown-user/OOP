@@ -8,6 +8,8 @@ import java.util.List;
  */
 public class Main {
 
+    private static final long BYTES_IN_MEGABYTE = 1048576;
+
     /**
      * Точка входа в программу.
      *
@@ -19,14 +21,14 @@ public class Main {
             return;
         }
 
-        String filePath = args[0];
-        String substring = args[1];
+        final String filePath = args[0];
+        final String substring = args[1];
 
         // Замер памяти ДО
         Runtime runtime = Runtime.getRuntime();
         // Сборщик мусора
         System.gc();
-        long memoryBefore = (runtime.totalMemory() - runtime.freeMemory()) / 1048576;
+        long memoryBefore = (runtime.totalMemory() - runtime.freeMemory()) / BYTES_IN_MEGABYTE;
 
         System.out.println("--- Старт поиска ---");
         System.out.println("Использовано ОЗУ до начала: " + memoryBefore + " МБ");
@@ -38,15 +40,16 @@ public class Main {
         try {
             List<Long> indices = searcher.find(filePath, substring);
 
-            long endTime = System.currentTimeMillis();
+            final long endTime = System.currentTimeMillis();
 
             // Замер памяти ПОСЛЕ
             System.gc();
-            long memoryAfter = (runtime.totalMemory() - runtime.freeMemory()) / 1048576;
+            final long memoryAfter = (runtime.totalMemory() - runtime.freeMemory()) / BYTES_IN_MEGABYTE;
 
             System.out.println("Найдено вхождений: " + indices.size());
             if (!indices.isEmpty()) {
-                System.out.println("Первые 5 индексов: " + indices.subList(0, Math.min(5, indices.size())));
+                System.out.println("Первые 5 индексов: "
+                        + indices.subList(0, Math.min(5, indices.size())));
             }
             System.out.println("Время выполнения: " + (endTime - startTime) + " мс");
             System.out.println("Использовано ОЗУ после: " + memoryAfter + " МБ");
