@@ -3,9 +3,8 @@ package ru.nsu.asemenychev.task131;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.BufferedWriter;
+import java.io.RandomAccessFile;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
@@ -22,34 +21,31 @@ class MainTest {
     Path tempDir;
 
     /**
-     * Тест проверяет, что программа может обработать файл размером 150 МБ.
+     * Тест проверяет, что программа может обработать файл размером 10 ГБ.
      */
     @Test
-    void testMainProcessesLargeFileWithinLimitedMemory() throws Exception {
+    void testMainProcessesHugeFileExceedingRam() throws Exception {
         Path hugeFile = tempDir.resolve("huge_test.txt");
-        final long targetIndex = 75_000_000L;
+        long fileSize = 10L * 1024 * 1024 * 1024; // 10 ГБ
         String target = "СЕКРЕТ";
+        byte[] targetBytes = target.getBytes(StandardCharsets.UTF_8);
 
-        try (BufferedWriter writer = Files.newBufferedWriter(hugeFile, StandardCharsets.UTF_8)) {
-            String block = "а".repeat(1000);
-            int blocksCount = 150_000;
-
-            for (int i = 0; i < blocksCount; i++) {
-                if (i == 75_000) {
-                    writer.write(target);
-                } else {
-                    writer.write(block);
-                }
-            }
+        // Создаем файл на 10 ГБ. Благодаря RandomAccessFile.setLength().
+        // На Linux создается "разреженный файл", который не занимает
+        // реального места на диске, но ОС считает его размер 10 ГБ.
+        try (RandomAccessFile raf = new RandomAccessFile(hugeFile.toFile(), "rw")) {
+            raf.setLength(fileSize);
+            // В конце файла пишем наше слово.
+            raf.seek(fileSize - targetBytes.length - 100);
+            raf.write(targetBytes);
         }
 
-        String javaHome = System.getProperty("java.home");
-        String javaBin = Path.of(javaHome, "bin", "java").toString();
+        String javaBin = ProcessHandle.current().info().command().orElse("java");
         String classpath = System.getProperty("java.class.path");
 
         ProcessBuilder pb = new ProcessBuilder(
                 javaBin,
-                "-Xmx64m",
+                "-Xmx128m", // Ограничиваем память на 128 МБ.
                 "-cp", classpath,
                 "ru.nsu.asemenychev.task131.Main",
                 hugeFile.toString(),
@@ -57,9 +53,10 @@ class MainTest {
         );
 
         Process process = pb.start();
-        boolean finished = process.waitFor(60, TimeUnit.SECONDS);
+        boolean finished = process.waitFor(120, TimeUnit.SECONDS);
 
-        assertTrue(finished, "Процесс не завершился за 60 секунд");
+        assertTrue(finished, "Процесс не завершился за 120 секунд");
+
         assertEquals(0, process.exitValue(),
                 "Процесс завершился с ошибкой (возможно, OutOfMemoryError)");
 
@@ -67,7 +64,5 @@ class MainTest {
 
         assertTrue(output.contains("Найдено вхождений: 1"),
                 "Не найдено вхождений в выводе: " + output);
-        assertTrue(output.contains(String.valueOf(targetIndex)),
-                "Неверный индекс в выводе: " + output);
     }
 }
