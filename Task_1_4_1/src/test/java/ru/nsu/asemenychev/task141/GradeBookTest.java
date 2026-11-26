@@ -122,9 +122,10 @@ class GradeBookTest {
 
     @Test
     void testRedDiplomaHasSatisfactory() {
-        GradeBook book = new GradeBook();
         Semester s1 = new Semester(1);
         s1.addGrade(new Grade("A", GradeValue.SATISFACTORY, ControlType.DIFF_PASS));
+
+        final GradeBook book = new GradeBook();
         book.addSemester(s1);
         book.setQualificationWorkGrade(GradeValue.EXCELLENT);
 
@@ -133,9 +134,10 @@ class GradeBookTest {
 
     @Test
     void testRedDiplomaNoExamsOrDiffPasses() {
-        GradeBook book = new GradeBook();
         Semester s1 = new Semester(1);
         s1.addGrade(new Grade("A", GradeValue.EXCELLENT, ControlType.CREDIT));
+
+        final GradeBook book = new GradeBook();
         book.addSemester(s1);
         book.setQualificationWorkGrade(GradeValue.EXCELLENT);
 
@@ -144,10 +146,11 @@ class GradeBookTest {
 
     @Test
     void testRedDiplomaLessThan75Percent() {
-        final GradeBook book = new GradeBook();
         Semester s1 = new Semester(1);
         s1.addGrade(new Grade("A", GradeValue.EXCELLENT, ControlType.EXAM));
         s1.addGrade(new Grade("B", GradeValue.GOOD, ControlType.EXAM));  // 1 из 2 -> 50%
+
+        final GradeBook book = new GradeBook();
         book.addSemester(s1);
         book.setQualificationWorkGrade(GradeValue.EXCELLENT);
 
@@ -156,12 +159,13 @@ class GradeBookTest {
 
     @Test
     void testRedDiplomaExactly75Percent() {
-        final GradeBook book = new GradeBook();
         Semester s1 = new Semester(1);
         s1.addGrade(new Grade("A", GradeValue.EXCELLENT, ControlType.EXAM));
         s1.addGrade(new Grade("B", GradeValue.EXCELLENT, ControlType.EXAM));
         s1.addGrade(new Grade("C", GradeValue.EXCELLENT, ControlType.EXAM));
         s1.addGrade(new Grade("D", GradeValue.GOOD, ControlType.EXAM));  // 3 из 4 -> 75%
+
+        final GradeBook book = new GradeBook();
         book.addSemester(s1);
         book.setQualificationWorkGrade(GradeValue.EXCELLENT);
 
@@ -187,10 +191,11 @@ class GradeBookTest {
 
     @Test
     void testScholarshipHasBadGrade() {
-        GradeBook book = new GradeBook();
         Semester s1 = new Semester(1);
         s1.addGrade(new Grade("A", GradeValue.GOOD, ControlType.EXAM));
         s1.addGrade(new Grade("B", GradeValue.SATISFACTORY, ControlType.EXAM));  // Тройка
+
+        final GradeBook book = new GradeBook();
         book.addSemester(s1);
 
         assertFalse(book.canGetIncreasedScholarship());  // getVal <= 3
@@ -198,11 +203,12 @@ class GradeBookTest {
 
     @Test
     void testScholarshipLowAverage() {
-        GradeBook book = new GradeBook();
         Semester s1 = new Semester(1);
         s1.addGrade(new Grade("A", GradeValue.EXCELLENT, ControlType.EXAM));
         s1.addGrade(new Grade("B", GradeValue.GOOD, ControlType.EXAM));
         s1.addGrade(new Grade("C", GradeValue.GOOD, ControlType.EXAM));  // 5+4+4 -> 4.33
+
+        final GradeBook book = new GradeBook();
         book.addSemester(s1);
 
         assertFalse(book.canGetIncreasedScholarship());  // < 4.5
@@ -210,11 +216,12 @@ class GradeBookTest {
 
     @Test
     void testScholarshipHighAverage() {
-        GradeBook book = new GradeBook();
         Semester s1 = new Semester(1);
         s1.addGrade(new Grade("A", GradeValue.EXCELLENT, ControlType.EXAM));
         s1.addGrade(new Grade("B", GradeValue.EXCELLENT, ControlType.EXAM));
         s1.addGrade(new Grade("C", GradeValue.GOOD, ControlType.EXAM));  // 5+5+4 -> 4.66
+
+        final GradeBook book = new GradeBook();
         book.addSemester(s1);
 
         assertTrue(book.canGetIncreasedScholarship());  // >= 4.5
