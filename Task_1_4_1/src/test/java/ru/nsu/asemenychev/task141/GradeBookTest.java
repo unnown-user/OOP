@@ -61,7 +61,8 @@ class GradeBookTest {
         Semester s1 = new Semester(1);
         s1.addGrade(new Grade("A", GradeValue.EXCELLENT, ControlType.EXAM));
         Semester s2 = new Semester(2);
-        s2.addGrade(new Grade("B", GradeValue.SATISFACTORY, ControlType.EXAM));  // Тройка на экзамене
+        s2.addGrade(new Grade("B",
+                GradeValue.SATISFACTORY, ControlType.EXAM));  // Тройка на экзамене
 
         book.addSemester(s1);
         book.addSemester(s2);
@@ -72,7 +73,8 @@ class GradeBookTest {
     void testTransferWithBadGradeOnCreditIsAllowed() {
         GradeBook book = new GradeBook();
         Semester s1 = new Semester(1);
-        s1.addGrade(new Grade("A", GradeValue.SATISFACTORY, ControlType.CREDIT));  // Тройка на зачете
+        s1.addGrade(new Grade("A",
+                GradeValue.SATISFACTORY, ControlType.CREDIT));  // Тройка на зачете
         book.addSemester(s1);
         assertTrue(book.canTransferToBudget());  // Тройка на зачете не мешает
     }
@@ -81,7 +83,8 @@ class GradeBookTest {
     void testTransferBadGradeWasThreeSemestersAgo() {
         GradeBook book = new GradeBook();
         Semester s1 = new Semester(1);
-        s1.addGrade(new Grade("A", GradeValue.SATISFACTORY, ControlType.EXAM));  // Тройка в 1 семестре
+        s1.addGrade(new Grade("A",
+                GradeValue.SATISFACTORY, ControlType.EXAM));  // Тройка в 1 семестре
         book.addSemester(s1);
         book.addSemester(new Semester(2));
         book.addSemester(new Semester(3));  // Текущий 3-й, 1-й уже не считается
@@ -141,7 +144,7 @@ class GradeBookTest {
 
     @Test
     void testRedDiplomaLessThan75Percent() {
-        GradeBook book = new GradeBook();
+        final GradeBook book = new GradeBook();
         Semester s1 = new Semester(1);
         s1.addGrade(new Grade("A", GradeValue.EXCELLENT, ControlType.EXAM));
         s1.addGrade(new Grade("B", GradeValue.GOOD, ControlType.EXAM));  // 1 из 2 -> 50%

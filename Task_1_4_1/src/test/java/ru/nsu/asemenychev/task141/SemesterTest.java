@@ -1,9 +1,9 @@
 package ru.nsu.asemenychev.task141;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
 
 class SemesterTest {
 
