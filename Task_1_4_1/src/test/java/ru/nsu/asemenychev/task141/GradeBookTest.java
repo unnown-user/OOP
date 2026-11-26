@@ -156,7 +156,7 @@ class GradeBookTest {
 
     @Test
     void testRedDiplomaExactly75Percent() {
-        GradeBook book = new GradeBook();
+        final GradeBook book = new GradeBook();
         Semester s1 = new Semester(1);
         s1.addGrade(new Grade("A", GradeValue.EXCELLENT, ControlType.EXAM));
         s1.addGrade(new Grade("B", GradeValue.EXCELLENT, ControlType.EXAM));
