@@ -3,12 +3,10 @@ package ru.nsu.asemenychev.task141;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import ru.nsu.asemenychev.task141.Grade.ControlType;
-import ru.nsu.asemenychev.task141.Grade.GradeValue;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.nsu.asemenychev.task141.Grade.ControlType;
+import ru.nsu.asemenychev.task141.Grade.GradeValue;
 
 class GradeBookTest {
 

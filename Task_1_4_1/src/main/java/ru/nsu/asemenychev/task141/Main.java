@@ -26,7 +26,8 @@ public class Main {
         Semester s2 = new Semester(2);
         s2.addGrade(new Grade("Программирование на C++", GradeValue.EXCELLENT, ControlType.EXAM));
         s1.addGrade(new Grade("ДУиТФКП", GradeValue.GOOD, ControlType.EXAM));
-        s2.addGrade(new Grade("Хаскель", GradeValue.SATISFACTORY, ControlType.CREDIT)); // Зачет -> тройка допустима
+        s2.addGrade(new Grade("Хаскель",
+                GradeValue.SATISFACTORY, ControlType.CREDIT)); // Зачет -> тройка допустима
         book.addSemester(s2);
 
         // 3 семестр (текущий)
@@ -41,6 +42,7 @@ public class Main {
         System.out.println("Средний балл: " + book.getCurrentAverage());
         System.out.println("Может перевестись на бюджет: " + book.canTransferToBudget());
         System.out.println("Может получить красный диплом: " + book.canGetRedDiploma());
-        System.out.println("Может получать повышенную стипендию: " + book.canGetIncreasedScholarship());
+        System.out.println("Может получать повышенную стипендию: "
+                + book.canGetIncreasedScholarship());
     }
 }
