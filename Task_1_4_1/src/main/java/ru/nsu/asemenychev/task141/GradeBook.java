@@ -2,6 +2,7 @@ package ru.nsu.asemenychev.task141;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import ru.nsu.asemenychev.task141.Grade.ControlType;
 import ru.nsu.asemenychev.task141.Grade.GradeValue;
 
@@ -49,19 +50,11 @@ public class GradeBook {
      * @return средний балл
      */
     public double getCurrentAverage() {
-        if (semesters.isEmpty()) {
-            return 0.0;
-        }
-
-        int sum = 0;
-        int count = 0;
-        for (Semester s : semesters) {
-            for (Grade g : s.getGrades()) {
-                sum += g.getValue().getVal();
-                count++;
-            }
-        }
-        return count == 0 ? 0.0 : (double) sum / count;
+        return semesters.stream()
+                .flatMap(s -> s.getGrades().stream())
+                .mapToInt(g -> g.getValue().getVal())
+                .average()
+                .orElse(0.0);
     }
 
     /**
@@ -78,18 +71,16 @@ public class GradeBook {
             return true;  // Нет оценок -> нет троек
         }
 
-        int lastIndex = semesters.size() - 1;
-        int startIndex = Math.max(0, semesters.size() - 2);  // Последние 2 семестра
+        // Последние 2 семестра
+        List<Semester> lastTwo = semesters.stream()
+                .skip(Math.max(0, semesters.size() - 2))
+                .collect(Collectors.toList());
 
-        for (int i = startIndex; i <= lastIndex; i++) {
-            Semester s = semesters.get(i);
-            for (Grade g : s.getGrades()) {
-                if (g.getType() == ControlType.EXAM && g.getValue() == GradeValue.SATISFACTORY) {
-                    return false;  // Нашли тройку на экзамене
-                }
-            }
-        }
-        return true;
+        // Проверяем, что нет ни одной тройки на экзамене
+        return lastTwo.stream()
+                .flatMap(s -> s.getGrades().stream())
+                .noneMatch(g -> g.getType() == ControlType.EXAM
+                        && g.getValue() == GradeValue.SATISFACTORY);
     }
 
     /**
@@ -102,33 +93,35 @@ public class GradeBook {
         if (semesters.isEmpty()) {
             return false;
         }
-        if (qualificationWorkGrade != GradeValue.EXCELLENT) {
+
+        if (qualificationWorkGrade != null && qualificationWorkGrade != GradeValue.EXCELLENT) {
             return false;
         }
 
-        int totalGrades = 0;
-        int excellentGrades = 0;
+        List<Grade> allGrades = semesters.stream()
+                .flatMap(s -> s.getGrades().stream())
+                .collect(Collectors.toList());
 
-        for (Semester s : semesters) {
-            for (Grade g : s.getGrades()) {
-                if (g.getValue().getVal() <= 3) {
-                    return false;  // Есть хоть одна тройка (или хуже) -> красный диплом невозможен
-                }
-
-                // Считаем проценты (учитываем только экзамены и диф. зачеты)
-                if (g.getType() == ControlType.EXAM || g.getType() == ControlType.DIFF_PASS) {
-                    totalGrades++;
-                    if (g.getValue() == GradeValue.EXCELLENT) {
-                        excellentGrades++;
-                    }
-                }
-            }
-        }
-
-        if (totalGrades == 0) {
+        // Если есть хоть одна тройка (или хуже) -> красный диплом невозможен
+        if (allGrades.stream().anyMatch(g -> g.getValue().getVal() <= 3)) {
             return false;
         }
-        return (double) excellentGrades / totalGrades >= 0.75;
+
+        // Считаем проценты (учитываем только экзамены и диф. зачеты)
+        List<Grade> gradedSubjects = allGrades.stream()
+                .filter(g -> g.getType() == ControlType.EXAM
+                        || g.getType() == ControlType.DIFF_PASS)
+                .collect(Collectors.toList());
+
+        if (gradedSubjects.isEmpty()) {
+            return false;
+        }
+
+        long excellentCount = gradedSubjects.stream()
+                .filter(g -> g.getValue() == GradeValue.EXCELLENT)
+                .count();
+
+        return (double) excellentCount / gradedSubjects.size() >= 0.75;
     }
 
     /**
@@ -142,19 +135,23 @@ public class GradeBook {
         }
 
         Semester currentSemester = semesters.get(semesters.size() - 1);
-        if (currentSemester.getGrades().isEmpty()) {
+        List<Grade> currentGrades = currentSemester.getGrades();
+
+        if (currentGrades.isEmpty()) {
             return false;
         }
 
-        int sum = 0;
-        for (Grade g : currentSemester.getGrades()) {
-            if (g.getValue().getVal() <= 3) {
-                return false;  // Есть тройки (или хуже) -> стипендии нет
-            }
-            sum += g.getValue().getVal();
+        // Есть тройки (или хуже) -> стипендии нет
+        if (currentGrades.stream().anyMatch(g -> g.getValue().getVal() <= 3)) {
+            return false;
         }
 
-        double semesterAverage = (double) sum / currentSemester.getGrades().size();
-        return semesterAverage >= 4.5;  // Стандартное требование
+        // Средний балл текущего семестра
+        double average = currentGrades.stream()
+                .mapToInt(g -> g.getValue().getVal())
+                .average()
+                .orElse(0.0);
+
+        return average >= 4.5;  // Стандартное требование для ПГАС
     }
 }

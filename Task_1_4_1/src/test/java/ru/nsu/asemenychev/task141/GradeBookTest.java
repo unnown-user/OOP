@@ -226,4 +226,22 @@ class GradeBookTest {
 
         assertTrue(book.canGetIncreasedScholarship());  // >= 4.5
     }
+
+    @Test
+    void testRedDiplomaForecastWithoutVkr() {
+        // Студент учится на 2 курсе, ВКР еще не защищал
+        Semester s1 = new Semester(1);
+        s1.addGrade(new Grade("A", GradeValue.EXCELLENT, ControlType.EXAM));
+        s1.addGrade(new Grade("B", GradeValue.EXCELLENT, ControlType.EXAM));
+        s1.addGrade(new Grade("C", GradeValue.GOOD, ControlType.EXAM));  // 2 из 3 -> 66%
+
+        Semester s2 = new Semester(2);
+        s2.addGrade(new Grade("D", GradeValue.EXCELLENT, ControlType.EXAM)); // Стало 3 из 4 -> 75%
+
+        GradeBook book = new GradeBook();
+        book.addSemester(s1);
+        book.addSemester(s2);
+
+        assertTrue(book.canGetRedDiploma());
+    }
 }
